@@ -26,6 +26,8 @@ button {
 }
 
 .header {
+    position: sticky;
+    top: 0;
     padding: 0.3rem 4.6rem;
     background-color: #25274D;
     color: #ffffff;
@@ -326,13 +328,61 @@ button {
     }
 }
 
-@media (min-width: 640px) {
+@media (max-width: 1280px) and (min-width: 640px) {
     body {
-        /* background-color: lightgreen; */
+        background-color: lightblue;
     }
 
     body>div>.container {
         max-width: 640;
         margin: 0 auto;
+    }
+
+    .header {
+        padding: 0.3rem 2rem;
+    }
+
+    .hero {
+        padding: 3.2rem 2rem 10rem;
+    }
+
+    .intro {
+        padding: 2rem 2rem;
+    }
+
+    .products {
+        padding: 4rem 2rem 2rem;
+    }
+
+    .products .items {
+        gap: 1rem;
+    }
+
+    .reasons {
+        padding: 3rem 0.4rem;
+    }
+
+    .reasons .items {
+        gap: 1.84rem 3rem;
+    }
+
+    .more {
+        padding: 3.4rem 2rem;
+    }
+
+    .ship {
+        padding-left: 22rem;
+    }
+
+    .ship .items {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .footer {
+        padding: 4rem 2rem;
+    }
+
+    .footer .title, .footer .subtitle {
+        width: 80%;
     }
 }

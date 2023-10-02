@@ -27,18 +27,21 @@ button {
 }
 
 .header {
+    padding: 0.3rem 4.6rem;
+    background-color: #25274D;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+.header .container {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 2rem;
-    width: 100%;
-    padding: 0.4rem 4rem;
-    background-color: #25274D;
-    color: #ffffff;
 }
 
 .header .title {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 200;
     letter-spacing: -0.1em;
 }
@@ -50,13 +53,16 @@ button {
 }
 
 .hero {
-    padding: 3.2rem 4rem 10rem;
+    padding: 3.2rem 4.6rem 10rem;
     background-color: #000000;
     background-image: url("assets/top_image_large.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     color: #fff;
+}
+
+.hero .container {
     display: flex;
     flex-direction: column;
 }
@@ -301,4 +307,16 @@ button {
     text-align: center;
     color: #ffffff;
     border-top: 1px solid #ffffff;
+}
+
+
+@media (min-width: 1280px) {
+    body {
+        /* background-color: lightgreen; */
+    }
+
+    body > div > .container {
+        max-width: 1280px;
+        margin: 0 auto;
+    }
 }

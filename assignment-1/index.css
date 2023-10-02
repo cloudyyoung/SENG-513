@@ -199,8 +199,11 @@ button {
 .more {
     padding: 5.8rem 4rem;
     padding-bottom: 3rem;
+}
+
+.more .container {
     display: grid;
-    grid-template-columns:repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 3rem;
 }
 
@@ -319,6 +322,17 @@ button {
 
     body > div > .container {
         max-width: 1280px;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 640px) {
+    body {
+        /* background-color: lightgreen; */
+    }
+
+    body>div>.container {
+        max-width: 640;
         margin: 0 auto;
     }
 }

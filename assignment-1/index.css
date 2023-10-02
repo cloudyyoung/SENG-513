@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300;400;500;600&display=swap');
 
 :root, * {
     font-family: 'Titillium Web', sans-serif;
@@ -8,6 +8,18 @@ body, div {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+}
+
+button {
+    cursor: pointer;
+    background-color: #2E9CCA;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 0rem 0.6rem 0rem;
+    font-size: 0.8rem;
+    margin-top: 1.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
 .header {
@@ -128,14 +140,6 @@ body, div {
 }
 
 .products .items .item button {
-    background-color: #2E9CCA;
-    color: #fff;
-    border: none;
-    padding: 0.6rem 0rem 0.6rem 0rem;
-    font-size: 0.8rem;
-    margin-top: 1.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
     width: 6.6rem;
 }
 
@@ -180,3 +184,41 @@ body, div {
 .reasons .items .item div:first-of-type {
     margin-bottom: 0.8rem;
 }
+
+.more {
+    padding: 5.8rem 4rem;
+    display: grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap: 3rem;
+}
+
+.more .item {
+    grid-column: span 1 / span 1;
+}
+
+.more .item .title {
+    font-size: 1.3rem;
+    color: #1F1F1F;
+    font-weight: 500;
+    padding-right: 0.6rem;
+}
+
+.more .item .subtitle {
+    color: #7E8082;
+    text-transform: uppercase;
+    margin-top: 1.2rem;
+}
+
+.more .item ul {
+    font-size: 0.96rem;
+    color: #7E8082;
+    padding: 1.2rem;
+    padding-bottom: 0rem;
+    margin-top: -0.4rem;
+}
+
+.more .item ul li {
+    padding: 0.22rem 0rem;
+    padding-right: 0.4rem;
+}
+

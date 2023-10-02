@@ -249,20 +249,21 @@ button {
 
 .ship .items .item {
     grid-column: span 1 / span 1;
-    color: #7E8082;
 }
 
 .ship .items .item .title {
-    font-size: 0.9rem;
+    font-size: 0.94rem;
     font-weight: 500;
     text-transform: uppercase;
     margin-top: 1.4rem;
+    color: #7E8082;
 }
 
 .ship .items .item .description {
     font-size: 0.9rem;
     font-weight: 300;
     margin-top: 1rem;
+    color: #7E8082;
 }
 
 .ship .btp {

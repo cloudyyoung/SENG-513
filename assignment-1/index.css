@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300;400;500;600&display=swap');
 
+:root {
+    color: #1F1F1F;
+}
+
 :root, * {
     font-family: 'Titillium Web', sans-serif;
 }
@@ -8,7 +12,6 @@ body, div {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    color: #1F1F1F;
 }
 
 button {

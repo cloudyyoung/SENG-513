@@ -163,7 +163,13 @@
 
     <div class="ship">
         <div class="container">
-            <img class="icon" src="assets/shipping_icon_large.png" />
+            <!-- <img class="icon" src="assets/shipping_icon_large.png" /> -->
+            <img 
+                class="icon" 
+                src="assets/shipping_icon_large.png" 
+                srcset="assets/shipping_icon_large.png 1028w, assets/shipping_icon_medium.png 1028w, assets/shipping_icon_small 640w"
+                sizes="(min-width: 1028px) 1028px, (min-width: 640px) 640px, 100vw"
+            />
             <div class="title">We ship worldwide!</div>
             <div class="items">
                 <div class="item">
@@ -210,7 +216,7 @@
         // Refresh page every second
         setInterval(() => {
             window.location.reload();
-        }, 50000);
+        }, 5000);
     </script>
 </body>
 

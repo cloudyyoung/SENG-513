@@ -316,10 +316,6 @@ button {
 
 
 @media (min-width: 1280px) {
-    body {
-        /* background-color: lightgreen; */
-    }
-
     body > div > .container {
         max-width: 1280px;
         margin: 0 auto;
@@ -327,10 +323,6 @@ button {
 }
 
 @media (max-width: 1280px) and (min-width: 640px) {
-    body {
-        background-color: lightblue;
-    }
-
     body>div>.container {
         max-width: 640px;
         margin: 0 auto;
@@ -387,10 +379,6 @@ button {
 }
 
 @media (max-width: 640px) {
-    body {
-        /* background-color: lightcoral; */
-    }
-
     :root {
         font-size: 22px;
     }

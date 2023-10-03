@@ -56,7 +56,7 @@ button {
     top: 0;
     right: 0;
     padding: 0;
-    margin: -0.3rem -2rem;
+    margin: -0.3rem -4.6rem;
 }
 
 .header .atb button {
@@ -355,6 +355,10 @@ button {
     .hero {
         padding: 3.2rem 2rem 10rem;
         background-image: url("assets/top_image_medium.png");
+    }
+
+    .header .atb {
+        margin-right: -2rem;
     }
 
     .intro {

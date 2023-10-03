@@ -1,0 +1,208 @@
+@media (max-width: 640px) {
+    :root {
+        font-size: 22px;
+    }
+
+    body>div>.container {
+        margin: 0 auto;
+    }
+
+    .header {
+        padding: 1rem;
+    }
+
+    .header .container {
+        flex-direction: column;
+        align-items: start;
+        gap: 0.8rem;
+    }
+
+    .header .title {
+        font-size: 1.7rem;
+        font-weight: 200;
+        letter-spacing: -0.1em;
+    }
+
+    .header .subtitle {
+        font-size: 0.7rem;
+    }
+
+    .header .atb {
+        display: none;
+    }
+
+    .hero {
+        position: relative;
+        background-image: url("assets/top_image_small.png");
+        margin-bottom: 8.2rem;
+    }
+
+    .hero .atb {
+        display: unset;
+    }
+
+    .hero .container {
+        padding: 0.8rem;
+        position: absolute;
+        top: 13rem;
+        left: 0;
+    }
+
+    .hero .title {
+        color: #1F1F1F;
+        font-size: 1.24rem;
+    }
+
+    .hero .subtitle {
+        color: #1F1F1F;
+        font-size: 0.84rem;
+        font-weight: 300;
+        margin-top: 0.2rem;
+        width: 86%;
+    }
+
+    .hero .atb {
+        margin-top: 0.8rem;
+    }
+
+    .intro {
+        padding: 2rem 1rem;
+    }
+
+    .intro .title {
+        font-weight: 600;
+        color: #25274D;
+    }
+
+    .intro .text {
+        color: #25274D;
+    }
+
+    .products {
+        padding: 4rem 1rem 6rem;
+    }
+
+    .products .title {
+        font-weight: 500;
+        color: #25274D;
+    }
+
+    .products .items {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .products .items .item img {
+        margin-left: -1rem;
+        margin-right: -1rem;
+        width: 110%;
+    }
+
+    .products .items .item .title {
+        color: #1F1F1F;
+    }
+
+    .products .items .item .description {
+        color: #25274D;
+    }
+
+    button {
+        padding: 0.6rem 1.2rem;
+    }
+
+    .reasons {
+        padding: 3rem 0.1rem;
+        background-image: none;
+    }
+
+    .reasons .items {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        gap: 1rem;
+    }
+
+    .more {
+        padding: 2rem 1rem;
+    }
+
+    .more .container {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1.6rem;
+    }
+
+    .more .item .title {
+        color: #25274D;
+    }
+
+    .more .item .subtitle {
+        color: #25274D;
+    }
+
+    .more .item ul {
+        color: #25274D;
+        font-weight: 300;
+    }
+
+    .ship {
+        padding: 1.2rem 2rem 1rem 1rem;
+    }
+
+    .ship .title {
+        color: #25274D;
+        margin-top: 0.4rem;
+        margin-bottom: 1rem;
+    }
+
+    .ship .items {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 0.6rem;
+    }
+
+    .ship .items .item .title {
+        color: #25274D;
+        font-weight: 300;
+    }
+
+    .ship .items .item .description {
+        color: #25274D;
+    }
+
+    .ship .icon {
+        position: absolute;
+        left: unset;
+        top: 1rem;
+        right: 0rem;
+        transform: scaleX(-1);
+        height: 14%;
+    }
+
+    .ship .btp {
+        position: absolute;
+        left: 50%;
+        top: 0;
+    }
+
+    .ship .btp img {
+        transform: translateX(-50%);
+        height: 18%;
+        width: 18%;
+    }
+
+    .footer {
+        padding: 3rem 1rem 4rem;
+        text-align: left;
+    }
+
+    .footer .title {
+        width: 100%;
+        font-size: 1.3rem;
+    }
+
+    .footer .subtitle {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+
+    .copyright {
+        font-size: 0.9rem;
+    }
+}

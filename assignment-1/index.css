@@ -276,7 +276,7 @@ button {
     left: -2.4rem;
     bottom: 4rem;
     height: 50%;
-    transform: scaleX(-1);
+    transform: scaleX(1);
 }
 
 .ship .title {
@@ -582,7 +582,7 @@ button {
         left: unset;
         top: 1rem;
         right: 0rem;
-        transform: scaleX(1);
+        transform: scaleX(-1);
         height: 14%;
     }
 

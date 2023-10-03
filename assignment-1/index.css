@@ -20,7 +20,6 @@ button {
     border: none;
     padding: 0.6rem 1.6rem;
     font-size: 0.8rem;
-    margin-top: 1.8rem;
     font-weight: 600;
     text-transform: uppercase;
 }
@@ -37,6 +36,7 @@ button {
     flex-direction: row;
     align-items: center;
     gap: 2rem;
+    position: relative;
 }
 
 .header .title {
@@ -51,11 +51,23 @@ button {
     font-weight: 300;
 }
 
+.header .atb {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0;
+    margin: -0.3rem -2rem;
+}
+
+.header .atb button {
+    padding: 1.1rem 2.88rem;
+    font-size: 0.9rem;
+}
+
 .hero {
     padding: 3.2rem 4.6rem 10rem;
     background-color: #000000;
     background-image: url("assets/top_image_large.png");
-    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     color: #fff;
@@ -136,6 +148,10 @@ button {
 
 .products .items .item img {
     width: 100%;
+}
+
+.products .items .item button {
+    margin-top: 1.8rem;
 }
 
 .products .items .item .title {
@@ -306,6 +322,10 @@ button {
     margin-top: 1rem;
 }
 
+.footer button {
+    margin-top: 1.8rem;
+}
+
 .copyright {
     background-color: #25274D;
     padding: 1.2rem 1.6rem 2rem 1.6rem;
@@ -405,6 +425,10 @@ button {
 
     .header .subtitle {
         font-size: 0.7rem;
+    }
+
+    .header .atb {
+        display: none;
     }
 
     .hero {

@@ -74,9 +74,14 @@ function refresh_players() {
     PLAYERS.forEach(player_no => {
         document.querySelector(`.players .player.${player_no} .hand`).replaceChildren(...PLAYERS_CARDS[player_no].map(card_face => {
             const card = document.createElement("div");
-            card.classList.add("card", "hide");
+            card.classList.add("card");
             card.classList.add(...card_face.split(" "));
             return card;
         }));
     });
 }
+
+window.addEventListener('resize', function () {
+    refresh_environment();
+    refresh_players();
+});

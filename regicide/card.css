@@ -1,0 +1,19 @@
+div.card {
+    background-image: url("assets/back.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 140px;
+    width: 100px;
+    border-radius: 4%;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.2, 0.0, 0, 1.0), top 0s, left 0s;
+}
+
+div.card:hover {
+    transform: scale(1.1);
+}
+
+div.jester {
+    background-image: url("assets/jester_1.png");
+}

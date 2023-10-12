@@ -23,12 +23,14 @@ SUITES.forEach(suite => {
     });
 });
 
-HANDS = ["a", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
-HANDS.forEach(hand => {
-    const card = document.createElement("div");
-    card.classList.add("card");
-    card.classList.add("hand");
-    card.classList.add(hand);
-    card.classList.add("hide");
-    document.querySelector(".cards").appendChild(card);
+HANDS = ["a", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+SUITES.forEach(suite => {
+    HANDS.forEach(hand => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.classList.add(suite);
+        card.classList.add(hand);
+        card.classList.add("hide");
+        document.querySelector(".cards").appendChild(card);
+    });
 });

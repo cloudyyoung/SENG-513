@@ -67,11 +67,6 @@ div.k.spade {
     background-image: url("assets/k_spade.png");
 }
 
-
-div.card.hide {
-    background-image: url("assets/back.png");
-}
-
 div.two.heart {
     background-image: url("assets/2_heart.png");
 }
@@ -232,3 +227,13 @@ div.a.spade {
     background-image: url("assets/a_spade.png");
 }
 
+
+
+
+
+
+
+
+div.card.hide {
+    background-image: url("assets/back.png");
+}

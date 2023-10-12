@@ -1,0 +1,28 @@
+
+body {
+    background-image: url("assets/bg.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+div.card {
+    background-image: url("assets/back.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 210px;
+    width: 150px;
+    border-radius: 4%;
+}
+
+div.jester {
+    background-image: url("assets/jester_1.png");
+}
+
+.jesters {
+    display: flex;
+    flex-direction: row;
+    gap: 0.6rem;
+}

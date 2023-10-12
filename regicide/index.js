@@ -1,3 +1,15 @@
+Array.prototype.shuffle = function () {
+    var i = this.length, j, temp;
+    if (i == 0) return this;
+    while (--i) {
+        j = Math.floor(Math.random() * (i + 1));
+        temp = this[i];
+        this[i] = this[j];
+        this[j] = temp;
+    }
+    return this;
+}
+
 
 const jester_1 = document.createElement("div");
 const jester_2 = document.createElement("div");
@@ -10,17 +22,20 @@ document.querySelector(".jesters").appendChild(jester_1);
 document.querySelector(".jesters").appendChild(jester_2);
 
 SUITES = ["heart", "diamond", "club", "spade"];
-ENEMIES = ["j", "k", "q"];
+ENEMIES = ["j", "q", "k"];
 
-SUITES.forEach(suite => {
-    ENEMIES.forEach(enemy => {
-        const card = document.createElement("div");
-        card.classList.add("card");
-        card.classList.add(suite);
-        card.classList.add(enemy);
-        card.classList.add("hide");
-        document.querySelector(".castle").appendChild(card);
-    });
+CASTLE_CARDS = ENEMIES.flatMap(suite => {
+    return SUITES.flatMap(enemy => {
+        return `${suite} ${enemy}`;
+    }).shuffle();
+});
+
+CASTLE_CARDS.reverse().forEach(card_face => {
+    const card = document.createElement("div");
+    card.classList.add("card", "hide");
+    card.classList.add(...card_face.split(" "));
+
+    document.querySelector(".castle").appendChild(card);
 });
 
 HANDS = ["a", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];

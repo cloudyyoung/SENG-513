@@ -1,3 +1,7 @@
+:root {
+    user-select: none;
+}
+
 
 body {
     background-image: url("assets/bg.jpg");
@@ -5,6 +9,9 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
 }
 
 div.card {
@@ -12,9 +19,15 @@ div.card {
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-    height: 210px;
-    width: 150px;
+    height: 140px;
+    width: 100px;
     border-radius: 4%;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.2, 0.0, 0, 1.0);
+}
+
+div.card:hover {
+    transform: scale(1.1);
 }
 
 div.jester {
@@ -25,4 +38,32 @@ div.jester {
     display: flex;
     flex-direction: row;
     gap: 0.6rem;
+}
+
+.environment {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-content: center;
+    justify-items: center;
+}
+
+.environment .cards,
+.environment .discard,
+.environment .castle,
+.environment .tavern {
+    height: 140px;
+    width: 100px;
+    border-radius: 4%;
+    border: 2px solid gray;
+}
+
+.castle-value {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-items: center;
+    gap: 2rem;
 }

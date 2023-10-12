@@ -42,6 +42,13 @@ body {
     border: 2px solid gray;
 }
 
+.environment .cards .card,
+.environment .discard .card,
+.environment .castle .card,
+.environment .tavern .card {
+    margin-bottom: -140px;
+}
+
 .castle-value {
     display: flex;
     flex-direction: row;

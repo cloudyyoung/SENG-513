@@ -39,13 +39,17 @@ CASTLE_CARDS.reverse().forEach(card_face => {
 });
 
 HANDS = ["a", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
-SUITES.forEach(suite => {
-    HANDS.forEach(hand => {
-        const card = document.createElement("div");
-        card.classList.add("card");
-        card.classList.add(suite);
-        card.classList.add(hand);
-        card.classList.add("hide");
-        document.querySelector(".cards").appendChild(card);
+
+PLAYABLE_CARDS = HANDS.flatMap(suite => {
+    return SUITES.flatMap(hand => {
+        return `${suite} ${hand}`;
     });
+}).shuffle();
+
+PLAYABLE_CARDS.reverse().forEach(card_face => {
+    const card = document.createElement("div");
+    card.classList.add("card", "hide");
+    card.classList.add(...card_face.split(" "));
+
+    document.querySelector(".cards").appendChild(card);
 });

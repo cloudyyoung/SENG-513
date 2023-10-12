@@ -25,7 +25,7 @@ SUITES = ["heart", "diamond", "club", "spade"];
 ENEMIES = ["j", "q", "k"];
 HANDS = ["a", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
 DISCARD_CARDS = [];
-PLAYERS = ["1", "2"];
+PLAYERS = ["one", "two"];
 PLAYERS_CARDS = {};
 
 
@@ -52,6 +52,7 @@ PLAYERS.forEach(player_no => {
 console.log(PLAYERS_CARDS);
 
 refresh_environment();
+refresh_players();
 
 function refresh_environment() {
     document.querySelector(".castle").replaceChildren(...CASTLE_CARDS.reverse().map(card_face => {
@@ -67,4 +68,15 @@ function refresh_environment() {
         card.classList.add(...card_face.split(" "));
         return card;
     }));
+}
+
+function refresh_players() {
+    PLAYERS.forEach(player_no => {
+        document.querySelector(`.players .player.${player_no} .hand`).replaceChildren(...PLAYERS_CARDS[player_no].map(card_face => {
+            const card = document.createElement("div");
+            card.classList.add("card", "hide");
+            card.classList.add(...card_face.split(" "));
+            return card;
+        }));
+    });
 }

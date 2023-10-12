@@ -25,18 +25,31 @@ SUITES = ["heart", "diamond", "club", "spade"];
 ENEMIES = ["j", "q", "k"];
 HANDS = ["a", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
 DISCARD_CARDS = [];
+PLAYERS = ["1", "2"];
+PLAYERS_CARDS = {};
 
+
+// Initializing castle cards
 CASTLE_CARDS = ENEMIES.flatMap(suite => {
     return SUITES.flatMap(enemy => {
         return `${suite} ${enemy}`;
     }).shuffle();
 });
 
+// Shuffle playable cards
 PLAYABLE_CARDS = HANDS.flatMap(suite => {
     return SUITES.flatMap(hand => {
         return `${suite} ${hand}`;
     });
 }).shuffle();
+
+
+// Draw 5 cards from playable cards for each player
+PLAYERS.forEach(player_no => {
+    PLAYERS_CARDS[player_no] = PLAYABLE_CARDS.splice(0, 5);
+});
+
+console.log(PLAYERS_CARDS);
 
 refresh_environment();
 

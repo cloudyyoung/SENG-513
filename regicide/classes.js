@@ -65,8 +65,9 @@ class Target {
 }
 
 class Player extends Target {
-    constructor(name, health) {
+    constructor(name, identifier, health) {
         super(name, health);
+        this.identifier = identifier;
         this.cards = [];
     }
 
@@ -79,7 +80,7 @@ class Player extends Target {
     }
 
     static initialize(player_count) {
-        return Array(player_count).fill().map((_, i) => new Player(`Player ${i + 1}`, 1));
+        return Array(player_count).fill().map((_, i) => new Player(`Player ${i + 1}`, `p${i + 1}`, 1));
     }
 }
 

@@ -22,81 +22,48 @@ const game = new Game(3);
 console.log(game);
 
 
-// const jester_1 = document.createElement("div");
-// const jester_2 = document.createElement("div");
-// jester_1.classList.add("card");
-// jester_1.classList.add("jester");
-// jester_2.classList.add("card");
-// jester_2.classList.add("jester");
-
-// document.querySelector(".jesters").appendChild(jester_1);
-// document.querySelector(".jesters").appendChild(jester_2);
-
-// SUITES = ["heart", "diamond", "club", "spade"];
-// ENEMIES = ["j", "q", "k"];
-// HANDS = ["a", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
-// DISCARD_CARDS = [];
-// PLAYERS = ["one", "two", "three"];
-// PLAYERS_CARDS = {};
-
-
-// // Initializing castle cards
-// CASTLE_CARDS = ENEMIES.flatMap(suite => {
-//     return SUITES.flatMap(enemy => {
-//         return `${suite} ${enemy}`;
-//     }).shuffle();
-// });
-
-// // Shuffle playable cards
-// PLAYABLE_CARDS = HANDS.flatMap(suite => {
-//     return SUITES.flatMap(hand => {
-//         return `${suite} ${hand}`;
-//     });
-// }).shuffle();
-
-
-// // Draw 5 cards from playable cards for each player
-// PLAYERS.forEach(player_no => {
-//     PLAYERS_CARDS[player_no] = PLAYABLE_CARDS.splice(0, 5);
-// });
-
-// console.log(PLAYERS_CARDS);
-
 refreshEnvironment();
 refreshPlayers();
+
+function refreshCard(card, card_element) {
+    card_element.classList.remove("hide", "reveal", "flip");
+    card_element.classList.add(card.facing === Facing.DOWN ? "hide" : "reveal");
+    card_element.classList.add("card", card.rank, card.suit);
+}
 
 function refreshEnvironment() {
     document.querySelector(".castle").replaceChildren(...game.enemies.slice(0).map(enemy => {
         const card = enemy.card;
         const card_element = document.createElement("div");
-        card_element.classList.add("card", card.facing === Facing.DOWN ? "hide" : "reveal");
-        card_element.classList.add(card.rank, card.suit);
+        refreshCard(card, card_element);
         card_element.addEventListener("click", () => {
             card.reveal();
-            refreshEnvironment();
+            refreshCard(card, card_element);
         });
-
         return card_element;
     }));
 
     document.querySelector(".tavern").replaceChildren(...game.tavern.slice(0).map(card => {
         const card_element = document.createElement("div");
-        card_element.classList.add("card", "hide");
-        card_element.classList.add(card.rank, card.suit);
-        card_element.addEventListener("click", () => card.reveal());
+        refreshCard(card, card_element);
+        card_element.addEventListener("click", () => {
+            game.getCurrentPlayer().addCard(game.drawTavernCard())
+            refreshPlayers();
+            refreshEnvironment();
+        });
         return card_element;
     }));
 }
 
 function refreshPlayers() {
-    game.players.forEach((player_no, player_index) => {
-        document.querySelector(`.players .player.${player_no} .hand`).replaceChildren(...PLAYERS_CARDS[player_no].map(card_face => {
-            const card = document.createElement("div");
-            card.classList.add("card");
-            card.classList.add(...card_face.split(" "));
-            return card;
-        }));
-        document.querySelector(`.players .player.${player_no} .label`).innerHTML = "Player " + (player_index + 1);
+    game.players.forEach((player, player_index) => {
+        const card_elements = game.players[player_index].cards.map(card => {
+            const card_element = document.createElement("div");
+            refreshCard(card, card_element);
+            return card_element;
+        });
+        document.querySelector(`.players .player.${player.identifier} .hand`).replaceChildren(...card_elements);
+        document.querySelector(`.players .player.${player.identifier} .label`).innerHTML = player.name;
     });
 }
 

@@ -1,3 +1,11 @@
+/**
+ * Course: SENG 513
+ * Date: OCT 11, 2023
+ * Assignment 2
+ * Name: Yunfan Yang
+ * UCID: 30067857
+ */
+
 Array.prototype.shuffle = function () {
     var i = this.length, j, temp;
     if (i == 0) return this;

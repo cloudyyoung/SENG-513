@@ -95,14 +95,16 @@ window.addEventListener('resize', function () {
     refreshPlayers();
 });
 
-// Flip card test
-document.querySelectorAll(".card").forEach(card => {
+// Castle cards
+document.querySelectorAll(".castle .card").forEach(card => {
     card.addEventListener("click", function () {
-        card.classList.toggle("flip");
-        setTimeout(() => {
-            card.classList.toggle("flip");
-            card.classList.toggle("hide");
-        }, 200);
+        if (card.classList.contains("hide")) {
+            card.classList.add("flip");
+            setTimeout(() => {
+                card.classList.remove("flip");
+                card.classList.remove("hide");
+            }, 200);
+        }
     });
 });
 

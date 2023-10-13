@@ -1,3 +1,11 @@
+/**
+ * Course: SENG 513
+ * Date: OCT 11, 2023
+ * Assignment 2
+ * Name: Yunfan Yang
+ * UCID: 30067857
+ */
+
 class Game {
     constructor(player_count) {
         // Initialize targets
@@ -26,6 +34,9 @@ class Game {
         this.players.forEach(player => {
             player.cards = this.tavern.splice(0, 5);
         });
+
+        // Reveal the first enemy
+        this.enemies[0].card.reveal();
     }
 
     nextPlayer() {

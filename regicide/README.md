@@ -1,5 +1,3 @@
-![Banner](assets/banner.png)
-
 # Regicide
 
 Regicide is a cooperative game where players work 
@@ -35,5 +33,6 @@ Open `index.html` to start game play.
 
 
 # Copyright Information
-Assets resources and rules are credited to **Badgers From Mars** 2023. More about [Regicide](https://www.regicidegame.com/).
+Assets resources and rules are credited to [**Pixel Playing Cards | 54 Cards + Card-back** on Itch.io](https://zxyonitch.itch.io/pixel-playing-cards-52-cards-card-back).
 
+The asserts are CC0.

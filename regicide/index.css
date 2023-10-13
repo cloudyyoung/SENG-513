@@ -5,12 +5,14 @@
 /* UCID: 30067857 */
 
 @import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700&display=swap');
+@import url('https://necolas.github.io/normalize.css/latest/normalize.css');
 
 :root {
     user-select: none;
 }
 
 body {
+    margin: 0rem;
     padding: 2rem;
     color: white;
     font-family: 'Gabarito', sans-serif;
@@ -52,8 +54,8 @@ body {
 .environment .discard,
 .environment .castle,
 .environment .tavern {
-    height: 140px;
-    width: 100px;
+    height: var(--card-height);
+    width: var(--card-width);
     border-radius: 4%;
     border: 2px solid gray;
 }
@@ -62,7 +64,7 @@ body {
 .environment .discard .card,
 .environment .castle .card,
 .environment .tavern .card {
-    margin-bottom: -140px;
+    margin-bottom: calc(var(--card-height) * -1);
 }
 
 .environment .castle-wrapper {
@@ -116,7 +118,6 @@ body {
 .hand {
     display: flex;
     flex-direction: row;
-    gap: 0.6rem;
     justify-content: center;
     justify-items: center;
 }
@@ -128,10 +129,56 @@ body {
 }
 
 .players .player .hand .card {
-    margin-left: -1.4rem;
+    margin-left: -0.2rem;
+    margin-right: -0.2rem;
 }
 
 .player.inactive {
     filter: brightness(50%);
     pointer-events: none;
+}
+
+@media (max-width: 960px) {
+    :root {
+        --card-height: 119px;
+        --card-width: 85px;
+    }
+
+    body {
+        padding: 1rem;
+    }
+
+    .environment {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .players {
+        grid-template-columns: 1fr;
+    }
+
+    .players .player .hand .card {
+        margin-left: -0.8rem;
+        margin-right: -0.8rem;
+    }
+}
+
+@media (max-width: 640px) {
+    :root {
+        --card-height: 98px;
+        --card-width: 70px;
+    }
+
+    body {
+        padding: 0rem;
+    }
+
+    .players .player .hand .card {
+        margin-left: -1.4rem;
+        margin-right: -1.4rem;
+    }
+
+    div.battle {
+        width: unset;
+        margin: 0rem;
+    }
 }

@@ -4,13 +4,18 @@
 /* Name: Yunfan Yang */
 /* UCID: 30067857 */
 
+:root {
+    --card-height: 140px;
+    --card-width: 100px;
+}
+
 div.card {
     background-image: url("assets/back.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-    height: 140px;
-    width: 100px;
+    height: var(--card-height);
+    width: var(--card-width);
     border-radius: 4%;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.2, 0.0, 0, 1.0), top 0s, left 0s, background-image 0s;

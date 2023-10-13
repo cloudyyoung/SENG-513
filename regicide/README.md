@@ -16,7 +16,7 @@ damage and if they can’t discard enough, everyone
 loses!
 
 ## Target platform
-Desktop and Mobile.
+Desktop, Pad and Mobile.
 
 ## Game Genre
 Coop Card Game (Board game).

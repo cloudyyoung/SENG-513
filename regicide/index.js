@@ -33,7 +33,7 @@ SUITES = ["heart", "diamond", "club", "spade"];
 ENEMIES = ["j", "q", "k"];
 HANDS = ["a", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
 DISCARD_CARDS = [];
-PLAYERS = ["one", "two"];
+PLAYERS = ["one", "two", "three"];
 PLAYERS_CARDS = {};
 
 
@@ -79,13 +79,14 @@ function refresh_environment() {
 }
 
 function refresh_players() {
-    PLAYERS.forEach(player_no => {
+    PLAYERS.forEach((player_no, player_index) => {
         document.querySelector(`.players .player.${player_no} .hand`).replaceChildren(...PLAYERS_CARDS[player_no].map(card_face => {
             const card = document.createElement("div");
             card.classList.add("card");
             card.classList.add(...card_face.split(" "));
             return card;
         }));
+        document.querySelector(`.players .player.${player_no} .label`).innerHTML = "Player " + (player_index + 1);
     });
 }
 

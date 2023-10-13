@@ -19,7 +19,7 @@ body {
     height: 100vh;
     overflow: hidden;
     display: grid;
-    grid-template-rows: 220px 1fr 250px;
+    grid-template-rows: 220px 1fr 360px;
 }
 
 .bg {
@@ -125,27 +125,47 @@ body {
     font-size: 0.9rem;
 }
 
-.hand {
-    display: flex;
-    flex-direction: row;
+.current-player {
+    height: 200px;
+}
+
+.current-player .hand {
     justify-content: center;
-    justify-items: center;
+}
+
+.current-player .label {
+    text-align: center;
 }
 
 .players {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+    width: fit-content;
+    margin: auto;
+}
+
+.hand {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    justify-items: center;
+}
+
+.label {
+    margin-top: 0.2rem;
+}
+
+.players .player .hand {
+    pointer-events: none;
 }
 
 .players .player .hand .card {
-    margin-left: -0.2rem;
-    margin-right: -0.2rem;
-}
-
-.player.inactive {
-    filter: brightness(50%);
-    pointer-events: none;
+    height: calc(var(--card-height) * 0.6);
+    width: calc(var(--card-width) * 0.6);
+    margin-left: -1rem;
+    margin-right: -1rem;
+    background-image: url("assets/back.png");
 }
 
 @media (max-width: 960px) {
@@ -161,15 +181,6 @@ body {
     .environment {
         grid-template-columns: repeat(2, 1fr);
     }
-
-    .players {
-        grid-template-columns: 1fr;
-    }
-
-    .players .player .hand .card {
-        margin-left: -0.8rem;
-        margin-right: -0.8rem;
-    }
 }
 
 @media (max-width: 640px) {
@@ -180,11 +191,6 @@ body {
 
     body {
         padding: 0rem;
-    }
-
-    .players .player .hand .card {
-        margin-left: -1.4rem;
-        margin-right: -1.4rem;
     }
 
     div.battle {

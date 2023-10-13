@@ -53,7 +53,6 @@ body {
 }
 
 .environment .discard,
-.environment .castle,
 .environment .tavern {
     height: var(--card-height);
     width: var(--card-width);
@@ -62,7 +61,6 @@ body {
 }
 
 .environment .discard .card,
-.environment .castle .card,
 .environment .tavern .card {
     margin-bottom: calc(var(--card-height) * -1);
 }
@@ -73,6 +71,17 @@ body {
     gap: 1rem;
     justify-content: center;
     justify-items: center;
+}
+
+.environment .castle {
+    height: calc(var(--card-height) * 1.2);
+    width: calc(var(--card-width) * 1.2);
+}
+
+.environment .castle .card {
+    height: calc(var(--card-height) * 1.2);
+    width: calc(var(--card-width) * 1.2);
+    margin-bottom: calc(var(--card-height) * -1.2);
 }
 
 .castle-wrapper .values {

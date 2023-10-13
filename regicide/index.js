@@ -26,13 +26,20 @@ refreshEnvironment();
 refreshPlayers();
 
 function refreshCard(card, card_element) {
-    card_element.classList.remove("hide", "reveal", "flip");
+    if (card_element.classList.contains("hide") && card.facing === Facing.UP) {
+        card_element.classList.add("flip");
+        setTimeout(() => {
+            card_element.classList.remove("flip");
+        }, 500);
+    }
+
+    card_element.classList.remove("hide", "reveal");
     card_element.classList.add(card.facing === Facing.DOWN ? "hide" : "reveal");
     card_element.classList.add("card", card.rank, card.suit);
 }
 
 function refreshEnvironment() {
-    document.querySelector(".castle").replaceChildren(...game.enemies.slice(0).map(enemy => {
+    document.querySelector(".castle").replaceChildren(...game.enemies.map(enemy => {
         const card = enemy.card;
         const card_element = document.createElement("div");
         refreshCard(card, card_element);
@@ -41,9 +48,9 @@ function refreshEnvironment() {
             refreshCard(card, card_element);
         });
         return card_element;
-    }));
+    }).reverse());
 
-    document.querySelector(".tavern").replaceChildren(...game.tavern.slice(0).map(card => {
+    document.querySelector(".tavern").replaceChildren(...game.tavern.map(card => {
         const card_element = document.createElement("div");
         refreshCard(card, card_element);
         card_element.addEventListener("click", () => {
@@ -52,7 +59,7 @@ function refreshEnvironment() {
             refreshEnvironment();
         });
         return card_element;
-    }));
+    }).reverse());
 }
 
 function refreshPlayers() {
@@ -88,57 +95,3 @@ window.addEventListener('resize', function () {
     refreshEnvironment();
     refreshPlayers();
 });
-
-// Castle cards
-document.querySelectorAll(".castle .card").forEach(card => {
-    card.addEventListener("click", function () {
-        if (card.classList.contains("hide")) {
-            card.classList.add("flip");
-            setTimeout(() => {
-                card.classList.remove("flip");
-                card.classList.remove("hide");
-            }, 200);
-        }
-    });
-});
-
-function playCard(player, card_face) {
-    // Play card from a player
-    // @params player: player object
-    // @params card_face: card face string
-}
-
-function dealDamage(target, damage) {
-    // Deal damage to a target (whether player or castle enemy)
-    // @params target: target string
-    // @params damage: damage number
-}
-
-function drawCard(player) {
-    // Draw a card from tavern to a player
-    // @params player: player object
-}
-
-function discardCard(player, card_face) {
-    // Discard a card from a player
-    // @params player: player object
-    // @params card_face: card face string
-}
-
-function endTurn(player) {
-    // End turn for a player
-    // @params player: player object
-}
-
-function startTurn(player) {
-    // Start turn for a player
-    // @params player: player object
-}
-
-function startGame() {
-    // Start game
-}
-
-function endGame() {
-    // End game
-}

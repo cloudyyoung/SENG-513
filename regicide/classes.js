@@ -36,7 +36,7 @@ class Game {
         });
 
         // Reveal the first enemy
-        this.enemies[0].card.reveal();
+        // this.enemies[0].card.reveal();
     }
 
     nextPlayer() {

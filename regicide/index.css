@@ -126,11 +126,16 @@ body {
 }
 
 .current-player {
-    height: 200px;
+    margin-bottom: 2rem;
 }
 
 .current-player .hand {
     justify-content: center;
+}
+
+.current-player .hand .card {
+    margin-left: -0.4rem;
+    margin-right: -0.4rem;
 }
 
 .current-player .label {
@@ -176,10 +181,7 @@ body {
 
     body {
         padding: 1rem;
-    }
-
-    .environment {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 190px 1fr 330px;
     }
 }
 
@@ -190,11 +192,12 @@ body {
     }
 
     body {
-        padding: 0rem;
+        padding: 1rem;
+        grid-template-rows: 180px 1fr 280px;
     }
 
     div.battle {
         width: unset;
-        margin: 0rem;
+        margin: 1rem 0rem;
     }
 }

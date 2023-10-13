@@ -85,3 +85,14 @@ window.addEventListener('resize', function () {
     refresh_environment();
     refresh_players();
 });
+
+// Flip card test
+document.querySelectorAll(".card").forEach(card => {
+    card.addEventListener("click", function () {
+        card.classList.toggle("flip");
+        setTimeout(() => {
+            card.classList.toggle("flip");
+            card.classList.toggle("hide");
+        }, 200);
+    });
+});

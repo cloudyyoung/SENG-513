@@ -7,8 +7,9 @@ div.card {
     width: 100px;
     border-radius: 4%;
     cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.2, 0.0, 0, 1.0), top 0s, left 0s;
+    transition: all 0.2s cubic-bezier(0.2, 0.0, 0, 1.0), top 0s, left 0s, background-image 0s;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    transform-style: preserve-3d;
 }
 
 div.card:hover {
@@ -232,7 +233,13 @@ div.a.spade {
 
 
 
+div.card.flip {
+    transform: rotateY(90deg);
+}
 
+div.card.flip:hover {
+    transform: scale(1.1) rotateY(90deg);
+}
 
 div.card.hide {
     background-image: url("assets/back.png");

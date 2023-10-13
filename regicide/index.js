@@ -108,8 +108,43 @@ document.querySelectorAll(".castle .card").forEach(card => {
     });
 });
 
-function playCard(player_no, card_face) {
+function playCard(player, card_face) {
     // Play card from a player
-    // @params player_no: player number
+    // @params player: player object
     // @params card_face: card face string
+}
+
+function dealDamage(target, damage) {
+    // Deal damage to a target (whether player or castle enemy)
+    // @params target: target string
+    // @params damage: damage number
+}
+
+function drawCard(player) {
+    // Draw a card from tavern to a player
+    // @params player: player object
+}
+
+function discardCard(player, card_face) {
+    // Discard a card from a player
+    // @params player: player object
+    // @params card_face: card face string
+}
+
+function endTurn(player) {
+    // End turn for a player
+    // @params player: player object
+}
+
+function startTurn(player) {
+    // Start turn for a player
+    // @params player: player object
+}
+
+function startGame() {
+    // Start game
+}
+
+function endGame() {
+    // End game
 }

@@ -170,7 +170,7 @@ body {
     width: calc(var(--card-width) * 0.6);
     margin-left: -1rem;
     margin-right: -1rem;
-    background-image: url("assets/back.png");
+    background-image: url("assets/backB.png");
 }
 
 @media (max-width: 960px) {

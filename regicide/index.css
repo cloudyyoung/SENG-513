@@ -200,4 +200,8 @@ body {
         width: unset;
         margin: 1rem 0rem;
     }
+
+    .castle-wrapper .values {
+        font-size: 12px;
+    }
 }

@@ -3,6 +3,7 @@ class Game {
         // Initialize targets
         this.players = Player.initialize(player_count);
         this.enemies = Enemy.initialize();
+        this.discards = [];
 
         // Set current player and enemy
         this.current_player_index = 0;
@@ -129,6 +130,10 @@ class Card {
 
     reveal() {
         this.facing = Facing.UP;
+    }
+
+    hide() {
+        this.facing = Facing.DOWN;
     }
 }
 

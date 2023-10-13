@@ -56,8 +56,25 @@ function refreshEnvironment() {
 }
 
 function refreshPlayers() {
+    const current_player = game.getCurrentPlayer();
+
+    const card_elements = current_player.cards.map(card => {
+        card.reveal();
+
+        const card_element = document.createElement("div");
+        refreshCard(card, card_element);
+        card_element.addEventListener("click", () => {
+            card.reveal();
+            refreshCard(card, card_element);
+        });
+        return card_element;
+    });
+    document.querySelector(`.current-player .hand`).replaceChildren(...card_elements);
+    document.querySelector(`.current-player .label`).innerHTML = current_player.name;
+
     game.players.forEach((player, player_index) => {
         const card_elements = game.players[player_index].cards.map(card => {
+            card.hide();
             const card_element = document.createElement("div");
             refreshCard(card, card_element);
             return card_element;

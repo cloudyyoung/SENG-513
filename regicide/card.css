@@ -220,19 +220,19 @@ div.ten.spade {
 }
 
 div.a.heart {
-    background-image: url("assets/AH.png");
+    background-image: url("assets/1H.png");
 }
 
 div.a.diamond {
-    background-image: url("assets/AD.png");
+    background-image: url("assets/1D.png");
 }
 
 div.a.club {
-    background-image: url("assets/AC.png");
+    background-image: url("assets/1C.png");
 }
 
 div.a.spade {
-    background-image: url("assets/AS.png");
+    background-image: url("assets/1S.png");
 }
 
 div.card.flip {

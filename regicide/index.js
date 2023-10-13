@@ -26,8 +26,8 @@ jester_1.classList.add("jester");
 jester_2.classList.add("card");
 jester_2.classList.add("jester");
 
-document.querySelector(".jesters").appendChild(jester_1);
-document.querySelector(".jesters").appendChild(jester_2);
+// document.querySelector(".jesters").appendChild(jester_1);
+// document.querySelector(".jesters").appendChild(jester_2);
 
 SUITES = ["heart", "diamond", "club", "spade"];
 ENEMIES = ["j", "q", "k"];
@@ -70,7 +70,7 @@ function refresh_environment() {
         return card;
     }));
 
-    document.querySelector(".cards").replaceChildren(...PLAYABLE_CARDS.reverse().map(card_face => {
+    document.querySelector(".tavern").replaceChildren(...PLAYABLE_CARDS.reverse().map(card_face => {
         const card = document.createElement("div");
         card.classList.add("card", "hide");
         card.classList.add(...card_face.split(" "));

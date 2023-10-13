@@ -45,12 +45,13 @@ body {
     flex-direction: column;
     gap: 2rem;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     justify-content: center;
     justify-items: center;
+    width: fit-content;
+    margin: auto;
 }
 
-.environment .cards,
 .environment .discard,
 .environment .castle,
 .environment .tavern {
@@ -60,7 +61,6 @@ body {
     border: 2px solid gray;
 }
 
-.environment .cards .card,
 .environment .discard .card,
 .environment .castle .card,
 .environment .tavern .card {

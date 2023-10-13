@@ -16,6 +16,10 @@ body {
     padding: 2rem;
     color: white;
     font-family: 'Gabarito', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 220px 1fr 250px;
 }
 
 .bg {
@@ -41,8 +45,6 @@ body {
 }
 
 .environment {
-    display: flex;
-    flex-direction: column;
     gap: 2rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -105,7 +107,6 @@ body {
 
 .battle {
     width: 70%;
-    height: 220px;
     border-radius: 0.6rem;
     border: 2px solid gray;
     margin: 2rem auto;

@@ -59,10 +59,10 @@ PLAYERS.forEach(player_no => {
 
 console.log(PLAYERS_CARDS);
 
-refresh_environment();
-refresh_players();
+refreshEnvironment();
+refreshPlayers();
 
-function refresh_environment() {
+function refreshEnvironment() {
     document.querySelector(".castle").replaceChildren(...CASTLE_CARDS.reverse().map(card_face => {
         const card = document.createElement("div");
         card.classList.add("card", "hide");
@@ -78,7 +78,7 @@ function refresh_environment() {
     }));
 }
 
-function refresh_players() {
+function refreshPlayers() {
     PLAYERS.forEach((player_no, player_index) => {
         document.querySelector(`.players .player.${player_no} .hand`).replaceChildren(...PLAYERS_CARDS[player_no].map(card_face => {
             const card = document.createElement("div");
@@ -91,8 +91,8 @@ function refresh_players() {
 }
 
 window.addEventListener('resize', function () {
-    refresh_environment();
-    refresh_players();
+    refreshEnvironment();
+    refreshPlayers();
 });
 
 // Flip card test
@@ -105,3 +105,9 @@ document.querySelectorAll(".card").forEach(card => {
         }, 200);
     });
 });
+
+function playCard(player_no, card_face) {
+    // Play card from a player
+    // @params player_no: player number
+    // @params card_face: card face string
+}

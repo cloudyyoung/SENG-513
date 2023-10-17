@@ -35,7 +35,7 @@ function refreshCard(card, card_element) {
 
     card_element.classList.remove("hide", "reveal");
     card_element.classList.add(card.facing === Facing.DOWN ? "hide" : "reveal");
-    card_element.classList.add("card", card.rank, card.suit);
+    card_element.classList.add("card", `${card.suit}-${card.rank}`);
 }
 
 function refreshEnvironment() {
@@ -73,6 +73,8 @@ function refreshPlayers() {
         card_element.addEventListener("click", () => {
             card.reveal();
             refreshCard(card, card_element);
+            // TODO: Implement this
+            // This function should add the card to the battlefield
         });
         return card_element;
     });
@@ -91,7 +93,18 @@ function refreshPlayers() {
     });
 }
 
+function refreshBattlefield() {
+    // TODO: Implement this
+    // This function should refresh the battlefield
+    // It should show the cards that are currently on the battlefield
+}
+
 window.addEventListener('resize', function () {
     refreshEnvironment();
     refreshPlayers();
 });
+
+function endTurn() {
+    // TODO: Implement this
+    // This function should end the turn and switch to the next player
+}

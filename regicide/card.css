@@ -27,211 +27,211 @@ div.card:hover {
     transform: scale(1.1);
 }
 
-div.j.heart {
-    background-image: url("assets/11H.png");
-}
-
-div.j.diamond {
-    background-image: url("assets/11D.png");
-}
-
-div.j.club {
-    background-image: url("assets/11C.png");
-}
-
-div.j.spade {
-    background-image: url("assets/11S.png");
-}
-
-div.q.heart {
-    background-image: url("assets/12H.png");
-}
-
-div.q.diamond {
-    background-image: url("assets/12D.png");
-}
-
-div.q.club {
-    background-image: url("assets/12C.png");
-}
-
-div.q.spade {
-    background-image: url("assets/12S.png");
-}
-
-div.k.heart {
+div.heart-13 {
     background-image: url("assets/13H.png");
 }
 
-div.k.diamond {
+div.diamond-13 {
     background-image: url("assets/13D.png");
 }
 
-div.k.club {
+div.club-13 {
     background-image: url("assets/13C.png");
 }
 
-div.k.spade {
+div.spade-13 {
     background-image: url("assets/13S.png");
 }
 
-div.two.heart {
-    background-image: url("assets/2H.png");
+div.heart-12 {
+    background-image: url("assets/12H.png");
 }
 
-div.two.diamond {
-    background-image: url("assets/2D.png");
+div.diamond-12 {
+    background-image: url("assets/12D.png");
 }
 
-div.two.club {
-    background-image: url("assets/2C.png");
+div.club-12 {
+    background-image: url("assets/12C.png");
 }
 
-div.two.spade {
-    background-image: url("assets/2S.png");
+div.spade-12 {
+    background-image: url("assets/12S.png");
 }
 
-div.three.heart {
-    background-image: url("assets/3H.png");
+div.heart-11 {
+    background-image: url("assets/11H.png");
 }
 
-div.three.diamond {
-    background-image: url("assets/3D.png");
+div.diamond-11 {
+    background-image: url("assets/11D.png");
 }
 
-div.three.club {
-    background-image: url("assets/3C.png");
+div.club-11 {
+    background-image: url("assets/11C.png");
 }
 
-div.three.spade {
-    background-image: url("assets/3S.png");
+div.spade-11 {
+    background-image: url("assets/11S.png");
 }
 
-div.four.heart {
-    background-image: url("assets/4H.png");
-}
-
-div.four.diamond {
-    background-image: url("assets/4D.png");
-}
-
-div.four.club {
-    background-image: url("assets/4C.png");
-}
-
-div.four.spade {
-    background-image: url("assets/4S.png");
-}
-
-div.five.heart {
-    background-image: url("assets/5H.png");
-}
-
-div.five.diamond {
-    background-image: url("assets/5D.png");
-}
-
-div.five.club {
-    background-image: url("assets/5C.png");
-}
-
-div.five.spade {
-    background-image: url("assets/5S.png");
-}
-
-div.six.heart {
-    background-image: url("assets/6H.png");
-}
-
-div.six.diamond {
-    background-image: url("assets/6D.png");
-}
-
-div.six.club {
-    background-image: url("assets/6C.png");
-}
-
-div.six.spade {
-    background-image: url("assets/6S.png");
-}
-
-div.seven.heart {
-    background-image: url("assets/7H.png");
-}
-
-div.seven.diamond {
-    background-image: url("assets/7D.png");
-}
-
-div.seven.club {
-    background-image: url("assets/7C.png");
-}
-
-div.seven.spade {
-    background-image: url("assets/7S.png");
-}
-
-div.eight.heart {
-    background-image: url("assets/8H.png");
-}
-
-div.eight.diamond {
-    background-image: url("assets/8D.png");
-}
-
-div.eight.club {
-    background-image: url("assets/8C.png");
-}
-
-div.eight.spade {
-    background-image: url("assets/8S.png");
-}
-
-div.nine.heart {
-    background-image: url("assets/9H.png");
-}
-
-div.nine.diamond {
-    background-image: url("assets/9D.png");
-}
-
-div.nine.club {
-    background-image: url("assets/9C.png");
-}
-
-div.nine.spade {
-    background-image: url("assets/9S.png");
-}
-
-div.ten.heart {
+div.heart-10 {
     background-image: url("assets/10H.png");
 }
 
-div.ten.diamond {
+div.diamond-10 {
     background-image: url("assets/10D.png");
 }
 
-div.ten.club {
+div.club-10 {
     background-image: url("assets/10C.png");
 }
 
-div.ten.spade {
+div.spade-10 {
     background-image: url("assets/10S.png");
 }
 
-div.a.heart {
+div.heart-9 {
+    background-image: url("assets/9H.png");
+}
+
+div.diamond-9 {
+    background-image: url("assets/9D.png");
+}
+
+div.club-9 {
+    background-image: url("assets/9C.png");
+}
+
+div.spade-9 {
+    background-image: url("assets/9S.png");
+}
+
+div.heart-8 {
+    background-image: url("assets/8H.png");
+}
+
+div.diamond-8 {
+    background-image: url("assets/8D.png");
+}
+
+div.club-8 {
+    background-image: url("assets/8C.png");
+}
+
+div.spade-8 {
+    background-image: url("assets/8S.png");
+}
+
+div.heart-7 {
+    background-image: url("assets/7H.png");
+}
+
+div.diamond-7 {
+    background-image: url("assets/7D.png");
+}
+
+div.club-7 {
+    background-image: url("assets/7C.png");
+}
+
+div.spade-7 {
+    background-image: url("assets/7S.png");
+}
+
+div.heart-6 {
+    background-image: url("assets/6H.png");
+}
+
+div.diamond-6 {
+    background-image: url("assets/6D.png");
+}
+
+div.club-6 {
+    background-image: url("assets/6C.png");
+}
+
+div.spade-6 {
+    background-image: url("assets/6S.png");
+}
+
+div.heart-5 {
+    background-image: url("assets/5H.png");
+}
+
+div.diamond-5 {
+    background-image: url("assets/5D.png");
+}
+
+div.club-5 {
+    background-image: url("assets/5C.png");
+}
+
+div.spade-5 {
+    background-image: url("assets/5S.png");
+}
+
+div.heart-4 {
+    background-image: url("assets/4H.png");
+}
+
+div.diamond-4 {
+    background-image: url("assets/4D.png");
+}
+
+div.club-4 {
+    background-image: url("assets/4C.png");
+}
+
+div.spade-4 {
+    background-image: url("assets/4S.png");
+}
+
+div.heart-3 {
+    background-image: url("assets/3H.png");
+}
+
+div.diamond-3 {
+    background-image: url("assets/3D.png");
+}
+
+div.club-3 {
+    background-image: url("assets/3C.png");
+}
+
+div.spade-3 {
+    background-image: url("assets/3S.png");
+}
+
+div.heart-2 {
+    background-image: url("assets/2H.png");
+}
+
+div.diamond-2 {
+    background-image: url("assets/2D.png");
+}
+
+div.club-2 {
+    background-image: url("assets/2C.png");
+}
+
+div.spade-2 {
+    background-image: url("assets/2S.png");
+}
+
+div.heart-1 {
     background-image: url("assets/1H.png");
 }
 
-div.a.diamond {
+div.diamond-1 {
     background-image: url("assets/1D.png");
 }
 
-div.a.club {
+div.club-1 {
     background-image: url("assets/1C.png");
 }
 
-div.a.spade {
+div.spade-1 {
     background-image: url("assets/1S.png");
 }
 

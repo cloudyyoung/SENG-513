@@ -12,6 +12,8 @@ class Game {
         this.players = Player.initialize(player_count);
         this.enemies = Enemy.initialize();
         this.discards = [];
+        this.battlefield = [];
+        this.attacker = null;
 
         // Set current player and enemy
         this.current_player_index = 0;
@@ -36,7 +38,10 @@ class Game {
         });
 
         // Reveal the first enemy
-        // this.enemies[0].card.reveal();
+        this.enemies[0].card.reveal();
+
+        // Player attacks first
+        this.attacker = this.getCurrentPlayer();
     }
 
     nextPlayer() {
@@ -58,6 +63,26 @@ class Game {
 
     drawTavernCard() {
         return this.tavern.shift();
+    }
+
+    addBattlefieldCard(card) {
+        this.battlefield.push(card);
+    }
+
+    clearBattlefield() {
+        this.battlefield = [];
+    }
+
+    concludeBattle() {
+        // TODO: Implement this
+        // This function should move all cards from the battlefield to the discard pile
+        // and also deal any damage to the target
+    }
+
+    updateAttacker() {
+        // TODO: Implement this
+        // This function should update the attacker
+        // based on the current attacker and the battlefield
     }
 }
 
@@ -146,6 +171,18 @@ class Card {
     hide() {
         this.facing = Facing.DOWN;
     }
+
+    getPower() {
+        // TODO: Implement this
+        // This function should return the power of the card
+        // based on the suit of the card
+    }
+
+    static totalRank(cards) {
+        // TODO: Implement this
+        // This function should return the total rank of the cards
+        // based on the rank of the cards
+    }
 }
 
 const Suit = {
@@ -155,20 +192,25 @@ const Suit = {
     DIAMONDS: "diamond",
 }
 
+// TODO: Implement constant for suit power
+// const SuitPower = {
+//     ...
+// }
+
 const Rank = {
-    ACE: "a",
-    TWO: "two",
-    THREE: "three",
-    FOUR: "four",
-    FIVE: "five",
-    SIX: "six",
-    SEVEN: "seven",
-    EIGHT: "eight",
-    NINE: "nine",
-    TEN: "ten",
-    JACK: "j",
-    QUEEN: "q",
-    KING: "k",
+    ACE: 1,
+    TWO: 2,
+    THREE: 3,
+    FOUR: 4,
+    FIVE: 5,
+    SIX: 6,
+    SEVEN: 7,
+    EIGHT: 8,
+    NINE: 9,
+    TEN: 10,
+    JACK: 11,
+    QUEEN: 12,
+    KING: 13,
 }
 
 const Facing = {

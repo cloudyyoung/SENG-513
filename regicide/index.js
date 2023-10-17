@@ -18,13 +18,18 @@ Array.prototype.shuffle = function () {
     return this;
 }
 
+// Initialize a game instance with a given number of players
 const game = new Game(3);
-console.log(game);
 
-
+// Initialize the environment
 refreshEnvironment();
 refreshPlayers();
 
+// Refresh card
+// This function should refresh the card element
+// It should show the card if it is facing up
+// It should hide the card if it is facing down
+// It should add the appropriate classes to the card element
 function refreshCard(card, card_element) {
     if (card_element.classList.contains("hide") && card.facing === Facing.UP) {
         card_element.classList.add("flip");
@@ -38,7 +43,12 @@ function refreshCard(card, card_element) {
     card_element.classList.add("card", `${card.suit}-${card.rank}`);
 }
 
+// Refresh environment
+// This function should refresh the environment
+// It should show the enemies that are currently on the castle
+// It should show the cards that are currently in the tavern
 function refreshEnvironment() {
+    // Display castle cards
     document.querySelector(".castle").replaceChildren(...game.enemies.map(enemy => {
         const card = enemy.card;
         const card_element = document.createElement("div");
@@ -50,6 +60,7 @@ function refreshEnvironment() {
         return card_element;
     }).reverse());
 
+    // Display tavern cards
     document.querySelector(".tavern").replaceChildren(...game.tavern.map(card => {
         const card_element = document.createElement("div");
         refreshCard(card, card_element);
@@ -62,9 +73,14 @@ function refreshEnvironment() {
     }).reverse());
 }
 
+// Refresh players
+// This function should refresh the players
+// It should show the cards that are currently in the player's hand
+// It should show the current player
+// It should show the glance card view other players
 function refreshPlayers() {
+    // Display current player and their cards
     const current_player = game.getCurrentPlayer();
-
     const card_elements = current_player.cards.map(card => {
         card.reveal();
 
@@ -81,6 +97,7 @@ function refreshPlayers() {
     document.querySelector(`.current-player .hand`).replaceChildren(...card_elements);
     document.querySelector(`.current-player .label`).innerHTML = current_player.name;
 
+    // Display other players and their cards (glance view)
     game.players.forEach((player, player_index) => {
         const card_elements = game.players[player_index].cards.map(card => {
             card.hide();

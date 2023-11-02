@@ -101,7 +101,7 @@ class Target {
     }
 
     takeDamage(damage) {
-        this.health -= damage;
+        this.health = Math.max(0, this.health - damage);
     }
 
     isDead() {

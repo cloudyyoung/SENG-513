@@ -131,7 +131,7 @@ function refreshBattlefield() {
 
 function refreshResolveButton() {
     // Remove existing resolve button
-    const existing_resolve_button = document.querySelector(".battlefield .resolve");
+    const existing_resolve_button = document.querySelector(".battle .resolve");
     if (existing_resolve_button) {
         existing_resolve_button.remove();
     }
@@ -140,7 +140,7 @@ function refreshResolveButton() {
     const resolve_button = document.createElement("button");
     resolve_button.classList.add("resolve");
     resolve_button.innerHTML = "Resolve";
-    document.querySelector(".battlefield").appendChild(resolve_button);
+    document.querySelector(".battle").appendChild(resolve_button);
     resolve_button.addEventListener("click", () => {
         game.resolveBattlefield();
         game.clearBattlefield();

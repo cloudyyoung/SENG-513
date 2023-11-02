@@ -11,6 +11,10 @@
     user-select: none;
 }
 
+div {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0rem;
     padding: 2rem;
@@ -105,13 +109,6 @@ body {
     font-weight: 600;
 }
 
-.battle {
-    width: 70%;
-    border-radius: 0.6rem;
-    border: 2px solid gray;
-    margin: 2rem auto;
-}
-
 .deck-wrapper {
     display: flex;
     flex-direction: column;
@@ -176,13 +173,28 @@ body {
 }
 
 .battle {
+    width: 70%;
+    border-radius: 0.6rem;
+    border: 2px solid gray;
+    margin: 2rem auto;
+    position: relative;
+}
+
+.battle .resolve {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 0.6rem;
+}
+
+.battlefield {
     display: flex;
     flex-direction: row;
     justify-content: center;
     justify-items: center;
     gap: 1rem;
     padding: 1rem;
-
+    height: 100%;
 }
 
 @media (max-width: 960px) {

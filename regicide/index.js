@@ -120,7 +120,7 @@ function refreshPlayers() {
 }
 
 function refreshBattlefield() {
-    document.querySelector(".battle").replaceChildren(...game.battlefield.map(card => {
+    document.querySelector(".battlefield").replaceChildren(...game.battlefield.map(card => {
         const card_element = document.createElement("div");
         refreshCard(card, card_element);
         return card_element;

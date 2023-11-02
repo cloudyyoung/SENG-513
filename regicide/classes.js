@@ -132,9 +132,9 @@ class Enemy extends Target {
         const enemies_rank = [Rank.JACK, Rank.QUEEN, Rank.KING];
         const enemies_suits = [Suit.HEARTS, Suit.SPADES, Suit.CLUBS, Suit.DIAMONDS];
         const lookup_table = {
-            [Rank.JACK]: { health: 10, attack: 20 },
-            [Rank.QUEEN]: { health: 15, attack: 30 },
-            [Rank.KING]: { health: 20, attack: 40 }
+            [Rank.JACK]: { health: 20, attack: 10 },
+            [Rank.QUEEN]: { health: 30, attack: 15 },
+            [Rank.KING]: { health: 40, attack: 20 }
         }
 
         return enemies_rank.flatMap(rank => {

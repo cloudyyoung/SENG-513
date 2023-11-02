@@ -124,7 +124,7 @@ class Player extends Target {
     }
 
     addCard(card) {
-        if (this.cards.length >= this.max_cards) {
+        if (this.isHandFull()) {
             throw new Error("Player hand is full");
         }
 
@@ -133,6 +133,10 @@ class Player extends Target {
 
     dropCard(card) {
         this.cards = this.cards.filter(c => c !== card);
+    }
+
+    isHandFull() {
+        return this.cards.length >= this.max_cards;
     }
 
     static initialize(player_count) {
@@ -210,13 +214,6 @@ const Suit = {
     CLUBS: "club",
     DIAMONDS: "diamond",
 }
-
-// const SuitPower = {
-//     [Suit.HEARTS]: 1,
-//     [Suit.SPADES]: 2,
-//     [Suit.CLUBS]: 3,
-//     [Suit.DIAMONDS]: 4,
-// }
 
 const Rank = {
     ACE: 1,

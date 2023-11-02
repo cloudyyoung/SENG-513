@@ -98,12 +98,6 @@ class Game {
 
         this.clearBattlefield();
     }
-
-    updateAttacker() {
-        // TODO: Implement this
-        // This function should update the attacker
-        // based on the current attacker and the battlefield
-    }
 }
 
 class Target {
@@ -122,13 +116,18 @@ class Target {
 }
 
 class Player extends Target {
-    constructor(name, identifier, health) {
-        super(name, health);
+    constructor(name, identifier, max_cards = 8) {
+        super(name, 1);
         this.identifier = identifier;
         this.cards = [];
+        this.max_cards = max_cards;
     }
 
     addCard(card) {
+        if (this.cards.length >= this.max_cards) {
+            throw new Error("Player hand is full");
+        }
+
         this.cards.push(card);
     }
 
@@ -137,7 +136,8 @@ class Player extends Target {
     }
 
     static initialize(player_count) {
-        return Array(player_count).fill().map((_, i) => new Player(`Player ${i + 1}`, `p${i + 1}`, 1));
+        const { max_hand } = PlayerConfigurations[player_count];
+        return Array(player_count).fill().map((_, i) => new Player(`Player ${i + 1}`, `p${i + 1}`, max_hand));
     }
 }
 
@@ -211,9 +211,11 @@ const Suit = {
     DIAMONDS: "diamond",
 }
 
-// TODO: Implement constant for suit power
 // const SuitPower = {
-//     ...
+//     [Suit.HEARTS]: 1,
+//     [Suit.SPADES]: 2,
+//     [Suit.CLUBS]: 3,
+//     [Suit.DIAMONDS]: 4,
 // }
 
 const Rank = {
@@ -235,4 +237,11 @@ const Rank = {
 const Facing = {
     UP: "up",
     DOWN: "down",
+}
+
+const PlayerConfigurations = {
+    1: { jesters: 0, max_cards: 8 },
+    2: { jesters: 0, max_cards: 7 },
+    3: { jesters: 1, max_cards: 6 },
+    4: { jesters: 2, max_cards: 5 },
 }

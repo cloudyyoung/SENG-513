@@ -96,9 +96,10 @@ function refreshPlayers() {
         refreshCard(card, card_element);
         card_element.addEventListener("click", () => {
             card.reveal();
-            refreshCard(card, card_element);
-            // TODO: Implement this
-            // This function should add the card to the battlefield
+            game.addBattlefieldCard(card);
+            current_player.dropCard(card);
+            refreshBattlefield();
+            refreshPlayers();
         });
         return card_element;
     });
@@ -119,9 +120,11 @@ function refreshPlayers() {
 }
 
 function refreshBattlefield() {
-    // TODO: Implement this
-    // This function should refresh the battlefield
-    // It should show the cards that are currently on the battlefield
+    document.querySelector(".battle").replaceChildren(...game.battlefield.map(card => {
+        const card_element = document.createElement("div");
+        refreshCard(card, card_element);
+        return card_element;
+    }));
 }
 
 window.addEventListener('resize', function () {

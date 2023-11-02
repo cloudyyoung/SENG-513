@@ -131,6 +131,7 @@ body {
 
 .current-player .hand {
     justify-content: center;
+    min-height: var(--card-height);
 }
 
 .current-player .hand .card {
@@ -163,6 +164,7 @@ body {
 
 .players .player .hand {
     pointer-events: none;
+    min-height: calc(var(--card-height) * 0.6);
 }
 
 .players .player .hand .card {
@@ -171,6 +173,16 @@ body {
     margin-left: -1rem;
     margin-right: -1rem;
     background-image: url("assets/backB.png");
+}
+
+.battle {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-items: center;
+    gap: 1rem;
+    padding: 1rem;
+
 }
 
 @media (max-width: 960px) {

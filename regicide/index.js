@@ -23,6 +23,7 @@ const game = new Game(3);
 
 // Initialize the environment
 refreshEnvironment();
+refreshBattlefield();
 refreshPlayers();
 
 // Refresh card
@@ -125,10 +126,40 @@ function refreshBattlefield() {
         refreshCard(card, card_element);
         return card_element;
     }));
+    refreshResolveButton();
+}
+
+function refreshResolveButton() {
+    // Remove existing resolve button
+    const existing_resolve_button = document.querySelector(".battlefield .resolve");
+    if (existing_resolve_button) {
+        existing_resolve_button.remove();
+    }
+
+    // Create resolve button
+    const resolve_button = document.createElement("button");
+    resolve_button.classList.add("resolve");
+    resolve_button.innerHTML = "Resolve";
+    document.querySelector(".battlefield").appendChild(resolve_button);
+    resolve_button.addEventListener("click", () => {
+        game.resolveBattlefield();
+        game.clearBattlefield();
+        refreshEnvironment();
+        refreshBattlefield();
+    });
+
+    // Show resolve button if there are cards on the battlefield
+    if (game.battlefield.length > 0) {
+        resolve_button.classList.remove("hide");
+        console.log(game.battlefield);
+    } else {
+        resolve_button.classList.add("hide");
+    }
 }
 
 window.addEventListener('resize', function () {
     refreshEnvironment();
+    refreshBattlefield();
     refreshPlayers();
 });
 

@@ -73,6 +73,14 @@ class Game {
         this.battlefield = [];
     }
 
+    resolveBattlefield() {
+        // TODO: Implement this
+        // Resolve card effects
+        const total_rank = Card.totalRank(this.battlefield);
+        const current_enemy = this.getCurrentEnemy();
+        current_enemy.takeDamage(total_rank);
+    }
+
     concludeBattle() {
         // TODO: Implement this
         // This function should move all cards from the battlefield to the discard pile
@@ -179,9 +187,8 @@ class Card {
     }
 
     static totalRank(cards) {
-        // TODO: Implement this
-        // This function should return the total rank of the cards
-        // based on the rank of the cards
+        const total_rank = cards.reduce((acc, card) => acc + card.rank, 0);
+        return total_rank;
     }
 }
 

@@ -197,6 +197,10 @@ body {
     height: 100%;
 }
 
+.hide {
+    display: none;
+}
+
 @media (max-width: 960px) {
     :root {
         --card-height: 119px;

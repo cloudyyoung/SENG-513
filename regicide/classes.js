@@ -53,6 +53,10 @@ class Game {
         return this.enemies.shift();
     }
 
+    discardCard(card) {
+        this.discards.push(card);
+    }
+
     getCurrentPlayer() {
         return this.players[this.current_player_index];
     }
@@ -81,10 +85,18 @@ class Game {
         current_enemy.takeDamage(total_rank);
     }
 
-    concludeBattle() {
-        // TODO: Implement this
-        // This function should move all cards from the battlefield to the discard pile
-        // and also deal any damage to the target
+    concludeTurn() {
+        if (this.getCurrentEnemy().isDead()) {
+            this.discardCard(this.getCurrentEnemy().card);
+            this.nextEnemy();
+        }
+
+        // Discard all battlefield cards
+        this.battlefield.forEach(card => {
+            this.discardCard(card);
+        });
+
+        this.clearBattlefield();
     }
 
     updateAttacker() {

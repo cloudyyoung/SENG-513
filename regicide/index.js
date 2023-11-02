@@ -80,6 +80,13 @@ function refreshEnvironment() {
         });
         return card_element;
     }).reverse());
+
+    // Display Discrad pile
+    document.querySelector(".discard").replaceChildren(...game.discards.map(card => {
+        const card_element = document.createElement("div");
+        refreshCard(card, card_element);
+        return card_element;
+    }).reverse());
 }
 
 // Refresh players
@@ -143,7 +150,7 @@ function refreshResolveButton() {
     document.querySelector(".battle").appendChild(resolve_button);
     resolve_button.addEventListener("click", () => {
         game.resolveBattlefield();
-        game.clearBattlefield();
+        game.concludeTurn();
         refreshEnvironment();
         refreshBattlefield();
     });

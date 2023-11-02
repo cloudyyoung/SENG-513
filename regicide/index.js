@@ -48,6 +48,14 @@ function refreshCard(card, card_element) {
 // It should show the enemies that are currently on the castle
 // It should show the cards that are currently in the tavern
 function refreshEnvironment() {
+    // Make sure current enemy is revealed
+    const currentEnemy = game.getCurrentEnemy();
+    currentEnemy.card.reveal();
+
+    // Display current enemy health and attack value
+    document.querySelector(".castle-wrapper .values .value.health .digit").innerHTML = currentEnemy.health;
+    document.querySelector(".castle-wrapper .values .value.attack .digit").innerHTML = currentEnemy.attack;
+
     // Display castle cards
     document.querySelector(".castle").replaceChildren(...game.enemies.map(enemy => {
         const card = enemy.card;

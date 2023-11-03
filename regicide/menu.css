@@ -98,3 +98,42 @@
   width: calc(21px * 1.6);
   height: calc(14px * 1.6);
 }
+
+@media (max-width: 960px) {
+
+  .menu-wrapper .game-title{
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+
+  .menu-wrapper {
+    background-image: url("assets/About.png");
+    background-size: cover;
+    padding: 1rem;
+    height: unset;
+  }
+
+  .menu {
+    grid-template-columns: 1fr;
+    gap: 0rem;
+  }
+
+  .menu .players-options {
+    justify-content: space-around;
+  }
+
+  .menu .option {
+    font-size: 1.2rem;
+    padding: 0.8rem;
+  }
+
+  .menu .start {
+    font-size: 1.2rem;
+  }
+
+  .menu-wrapper .game-title {
+    margin-top: 0rem;
+  }
+}

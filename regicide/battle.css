@@ -4,12 +4,36 @@
   --battle-bg-slice-height: 103px;
 }
 
-.border {
+.battle {
+  width: 70%;
+  margin: 2rem auto;
+  position: relative;
+  padding: 3rem 2rem 4rem;
+}
+
+.battle .description {
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 0.6rem;
+}
+
+.battle .resolve {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 0.6rem;
+}
+
+.battle .resolve.hide {
+  display: none;
+}
+
+.battle .border {
   position: absolute;
   background-repeat: no-repeat;
 }
 
-.top-left {
+.battle .top-left {
   width: var(--battle-bg-slice-width);
   height: var(--battle-bg-slice-height);
   background-image: url('assets/battle/Blank_1.png');
@@ -18,7 +42,7 @@
   left: 0;
 }
 
-.top-right {
+.battle .top-right {
   width: var(--battle-bg-slice-width);
   height: var(--battle-bg-slice-height);
   background-image: url("assets/battle/Blank_3.png");
@@ -27,7 +51,7 @@
   right: 0;
 }
 
-.bottom-left {
+.battle .bottom-left {
   width: var(--battle-bg-slice-width);
   height: var(--battle-bg-slice-height);
   background-image: url("assets/battle/Blank_7.png");
@@ -36,7 +60,7 @@
   left: 0;
 }
 
-.bottom-right {
+.battle .bottom-right {
   width: var(--battle-bg-slice-width);
   height: var(--battle-bg-slice-height);
   background-image: url("assets/battle/Blank_9.png");
@@ -45,8 +69,8 @@
   right: 0;
 }
 
-.top,
-.bottom {
+.battle .top,
+.battle .bottom {
   left: var(--battle-bg-slice-width);
   width: calc(100% - (var(--battle-bg-slice-width) * 2));
   height: var(--battle-bg-slice-height);
@@ -54,20 +78,20 @@
   background-repeat: repeat-x;
 }
 
-.top {
+.battle .top {
   background-image: url("assets/battle/Blank_2.png");
   background-position: top center;
   top: 0;
 }
 
-.bottom {
+.battle .bottom {
   background-image: url("assets/battle/Blank_8.png");
   background-position: bottom center;
   bottom: 0;
 }
 
-.left,
-.right {
+.battle .left,
+.battle .right {
   top: var(--battle-bg-slice-height);
   height: calc(100% - (var(--battle-bg-slice-height) * 2));
   width: var(--battle-bg-slice-width);
@@ -75,19 +99,19 @@
   background-repeat: repeat-y;
 }
 
-.left {
+.battle .left {
   background-image: url("assets/battle/Blank_4.png");
   background-position: left center;
   left: 0;
 }
 
-.right {
+.battle .right {
   background-image: url("assets/battle/Blank_6.png");
   background-position: right center;
   right: 0;
 }
 
-.content {
+.battle .content {
   position: absolute;
   top: var(--battle-bg-slice-height);
   left: var(--battle-bg-slice-width);
@@ -95,4 +119,22 @@
   height: calc(100% - (var(--battle-bg-slice-height) * 2));
   background-image: url("assets/battle/Blank_5.png");
   background-size: 100% 100%;
+}
+
+.battle .description {
+  position: absolute;
+  bottom: 3rem;
+  left: 0;
+  right: 0;
+  color: black;
+}
+
+.battle .battlefield {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  height: 100%;
 }

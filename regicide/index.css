@@ -23,7 +23,7 @@ body {
     height: 100vh;
     overflow: hidden;
     display: grid;
-    grid-template-rows: 280px 1fr 360px;
+    grid-template-rows: 280px 1fr 250px;
 }
 
 .bg {
@@ -180,40 +180,6 @@ body {
     background-image: url("assets/backB.png");
 }
 
-.battle {
-    width: 70%;
-    border-radius: 0.6rem;
-    border: 2px solid gray;
-    margin: 2rem auto;
-    position: relative;
-}
-
-.battle .description {
-    text-align: center;
-    font-size: 1.2rem;
-    margin: 0.6rem;
-}
-
-.battle .resolve {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    padding: 0.6rem;
-}
-
-.battle .resolve.hide {
-    display: none;
-}
-
-.battlefield {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    justify-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    height: 100%;
-}
 
 @media (max-width: 960px) {
     :root {

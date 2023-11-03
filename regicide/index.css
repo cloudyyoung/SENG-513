@@ -180,6 +180,12 @@ body {
     position: relative;
 }
 
+.battle .description {
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 0.6rem;
+}
+
 .battle .resolve {
     position: absolute;
     right: 0;

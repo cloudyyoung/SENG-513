@@ -156,15 +156,16 @@ class Enemy extends Target {
         const enemies_rank = [Rank.JACK, Rank.QUEEN, Rank.KING];
         const enemies_suits = [Suit.HEARTS, Suit.SPADES, Suit.CLUBS, Suit.DIAMONDS];
         const lookup_table = {
-            [Rank.JACK]: { health: 20, attack: 10 },
-            [Rank.QUEEN]: { health: 30, attack: 15 },
-            [Rank.KING]: { health: 40, attack: 20 }
+            [Rank.JACK]: { health: 20, attack: 10, rank_name: "Jack" },
+            [Rank.QUEEN]: { health: 30, attack: 15, rank_name: "Queen" },
+            [Rank.KING]: { health: 40, attack: 20, rank_name: "King" }
         }
 
         return enemies_rank.flatMap(rank => {
             return enemies_suits.flatMap(suit => {
-                const name = `${suit} ${rank}`;
-                const { health, attack } = lookup_table[rank];
+                const { health, attack, rank_name } = lookup_table[rank];
+                const suit_name = suit.charAt(0).toUpperCase() + suit.slice(1);
+                const name = `${suit_name} ${rank_name}`;
                 const card = new Card(name, suit, rank);
                 return new Enemy(name, health, attack, card);
             }).shuffle();

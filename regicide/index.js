@@ -134,6 +134,7 @@ function refreshBattlefield() {
         return card_element;
     }));
     refreshResolveButton();
+    document.querySelector(".battle .description").innerHTML = `"${game.getCurrentPlayer().name}" is attacking "${game.getCurrentEnemy().name}" with ${game.battlefield.length} cards`;
 }
 
 function refreshResolveButton() {

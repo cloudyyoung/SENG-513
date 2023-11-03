@@ -1,13 +1,23 @@
 :root {
-  --current-player-bg-slice-width: 133px;
-  --current-player-bg-slice-height: 141px;
+  --current-player-bg-slice-original-width: 133px;
+  --current-player-bg-slice-original-height: 141px;
+  --current-player-bg-slice-size-ratio: 1.2;
+  --current-player-bg-slice-width: calc(var(--current-player-bg-slice-original-width) * var(--current-player-bg-slice-size-ratio));
+  --current-player-bg-slice-height: calc(var(--current-player-bg-slice-original-height) * var(--current-player-bg-slice-size-ratio));
+
+  --current-player-width: calc(var(--card-width) * 8.4);
+
+  --current-player-hand-card-offset: calc(var(--card-width) * 0.1);
 }
 
 .current-player {
   position: relative;
-  width: 100%;
-  max-width: 870px;
+  width: var(--current-player-width);
   margin: 0 auto;
+}
+
+.current-player .border {
+  background-size: contain;
 }
 
 .current-player .border.left, 
@@ -38,7 +48,7 @@
 
 .current-player .border.middle {
   left: var(--current-player-bg-slice-width);
-  width: calc(100% - (var(--current-player-bg-slice-width) * 2));
+  width: calc(100% - (var(--current-player-bg-slice-width) * 2) + 2px);
   height: var(--current-player-bg-slice-height);
   background-size: 100% cover;
   background-repeat: repeat-x;
@@ -60,8 +70,8 @@
 }
 
 .current-player .hand .card {
-  margin-left: -0.4rem;
-  margin-right: -0.4rem;
+  margin-left: calc(-1 * var(--current-player-hand-card-offset));
+  margin-right: calc(-1 * var(--current-player-hand-card-offset));
 }
 
 .players {
@@ -93,3 +103,19 @@
   margin-right: -1rem;
   background-image: url("assets/backB.png");
 } */
+
+@media (max-width: 960px) {
+  :root {
+    --current-player-bg-slice-size-ratio: 1;
+    --current-player-width: calc(var(--card-width) * 7);
+    --current-player-hand-card-offset: calc(var(--card-width) * 0.2);
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --current-player-bg-slice-size-ratio: 0.82;
+    --current-player-width: calc(var(--card-width) * 4.7);
+    --current-player-hand-card-offset: calc(var(--card-width) * 0.36);
+  }
+}

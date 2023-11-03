@@ -171,6 +171,10 @@ document.querySelector(".overlay.players-overlay").addEventListener("click", () 
     document.querySelector(".players-overlay").classList.add("hide");
 })
 
+document.querySelector(".current-player .label").addEventListener("click", () => {
+    document.querySelector(".players-overlay").classList.remove("hide");
+})
+
 function endTurn() {
     // TODO: Implement this
     // This function should end the turn and switch to the next player

@@ -1,0 +1,100 @@
+
+:root {
+  --menu-bg-slice-original-width: 386px;
+  --menu-bg-slice-original-height: 319px;
+  --menu-bg-slice-size-ratio: 1.8;
+  --menu-bg-slice-width: calc(var(--menu-bg-slice-original-width) * var(--menu-bg-slice-size-ratio));
+  --menu-bg-slice-height: calc(var(--menu-bg-slice-original-height) * var(--menu-bg-slice-size-ratio));
+}
+
+.overlay.menu-overlay {
+  background-image: url("assets/Epgsl7.gif");
+}
+
+.menu-wrapper {
+  background-image: url("assets/Book.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 30;
+  width: var(--menu-bg-slice-width);
+  height: var(--menu-bg-slice-height);
+  padding: 3rem 4rem 9rem;
+  color: black;
+}
+
+.menu-wrapper .game-title {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 900;
+  background-image: url("assets/Header7.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 2rem 0rem 1.8rem;
+  margin-top: -6rem;
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.2rem;
+}
+
+.menu .title {
+  font-size: 1.2rem;
+  margin-bottom: 0.2rem;
+  font-weight: 600;
+}
+
+.menu .p {
+  margin-bottom: 1rem;
+}
+
+.menu .players-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.menu .option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  padding: 0.9rem;
+  cursor: pointer;
+}
+
+.menu .option:hover, .menu .option.selected {
+  background-image: url("assets/Box.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.menu .option.option.selected {
+  color: #b80000;
+}
+
+.menu .start {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+  gap: 0.3rem;
+  font-size: 1.6rem;
+  color: #b80000;
+}
+
+.menu .start .arrow {
+  background-image: url("assets/ButtonRight.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: calc(21px * 1.6);
+  height: calc(14px * 1.6);
+}

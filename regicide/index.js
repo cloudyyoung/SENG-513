@@ -19,7 +19,7 @@ Array.prototype.shuffle = function () {
 }
 
 // Initialize a game instance with a given number of players
-const game = new Game(3);
+let game = new Game(3);
 
 // Initialize the environment
 refreshEnvironment();
@@ -173,6 +173,11 @@ document.querySelector(".overlay.players-overlay").addEventListener("click", () 
 
 document.querySelector(".current-player .label").addEventListener("click", () => {
     document.querySelector(".players-overlay").classList.remove("hide");
+})
+
+document.querySelector(".menu .start").addEventListener("click", () => {
+    document.querySelector(".menu-overlay").classList.add("hide");
+    game = new Game(3);
 })
 
 function endTurn() {

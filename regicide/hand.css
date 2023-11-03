@@ -19,6 +19,7 @@
 .current-player .border {
   background-size: contain;
   z-index: -1;
+  pointer-events: none;
 }
 
 .current-player .border.left, 

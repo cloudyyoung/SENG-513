@@ -23,7 +23,7 @@ body {
     height: 100vh;
     overflow: hidden;
     display: grid;
-    grid-template-rows: 240px 1fr 240px;
+    grid-template-rows: 240px 1fr 250px;
 }
 
 .bg {
@@ -91,7 +91,7 @@ body {
     }
 
     body {
-        grid-template-rows: 210px 1fr 240px;
+        grid-template-rows: 210px 1fr 230px;
     }
 }
 
@@ -102,6 +102,6 @@ body {
     }
 
     body {
-        grid-template-rows: 210px 1fr 240px;
+        grid-template-rows: 210px 1fr 210px;
     }
 }

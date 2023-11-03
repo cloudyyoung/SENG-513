@@ -23,12 +23,11 @@ body {
     height: 100vh;
     overflow: hidden;
     display: grid;
-    grid-template-rows: 280px 1fr 250px;
+    grid-template-rows: 280px 1fr 200px;
 }
 
 .bg {
-    background-image: url("assets/bg.jpg");
-    background-size: cover;
+    background-image: url("assets/Epgsl7.gif");
     position: fixed;
     top: 0;
     left: 0;

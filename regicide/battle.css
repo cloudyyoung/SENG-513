@@ -5,8 +5,9 @@
 }
 
 .battle {
-  width: 70%;
-  margin: 2rem auto;
+  width: 100%;
+  max-width: 980px;
+  margin: 1rem auto;
   position: relative;
   padding: 3.6rem 2rem 4rem;
 }

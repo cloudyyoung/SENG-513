@@ -5,7 +5,8 @@
 
 .current-player {
   position: relative;
-  width: 46%;
+  width: 100%;
+  max-width: 870px;
   margin: 0 auto;
 }
 

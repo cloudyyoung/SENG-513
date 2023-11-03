@@ -17,13 +17,13 @@ div {
 
 body {
     margin: 0rem;
-    padding: 2rem;
+    padding: 1rem;
     color: white;
     font-family: 'Gabarito', sans-serif;
     height: 100vh;
     overflow: hidden;
     display: grid;
-    grid-template-rows: 230px 1fr 240px;
+    grid-template-rows: 240px 1fr 240px;
 }
 
 .bg {
@@ -91,8 +91,7 @@ body {
     }
 
     body {
-        padding: 1rem;
-        grid-template-rows: 190px 1fr 330px;
+        grid-template-rows: 210px 1fr 240px;
     }
 }
 
@@ -103,16 +102,6 @@ body {
     }
 
     body {
-        padding: 1rem;
-        grid-template-rows: 180px 1fr 280px;
-    }
-
-    div.battle {
-        width: unset;
-        margin: 1rem 0rem;
-    }
-
-    .castle-wrapper .values {
-        font-size: 12px;
+        grid-template-rows: 210px 1fr 240px;
     }
 }

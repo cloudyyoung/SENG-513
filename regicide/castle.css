@@ -1,6 +1,9 @@
 :root {
-  --castle-bg-slice-width: calc(277px * 0.666);
-  --castle-bg-slice-height: calc(114px * 0.666);
+  --castle-bg-slice-original-width: 277px;
+  --castle-bg-slice-original-height: 114px;
+  --castle-bg-slice-size-ratio: 0.666;
+  --castle-bg-slice-width: calc(var(--castle-bg-slice-original-width) * var(--castle-bg-slice-size-ratio));
+  --castle-bg-slice-height: calc(var(--castle-bg-slice-original-height) * var(--castle-bg-slice-size-ratio));
 }
 
 .castle-wrapper {
@@ -9,7 +12,7 @@
   gap: 0.6rem;
   justify-content: center;
   justify-items: center;
-  padding: 4rem 2rem 2.6em;
+  padding: 4rem 2rem 3em;
   margin: 0rem -2rem;
   position: relative;
   z-index: 9;
@@ -87,3 +90,30 @@
   background-position: center center;
 }
 
+@media (max-width: 960px) {
+  :root {
+    --castle-bg-slice-size-ratio: 0.552;
+  }
+  
+  .castle-wrapper {
+    padding: 3rem 1.6rem 2.6em;
+  }
+
+  .castle-wrapper .values{
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --castle-bg-slice-size-ratio: 0.46;
+  }
+  
+  .castle-wrapper {
+    padding: 2.5rem 1.4rem 2.3em;
+  }
+
+  .castle-wrapper .values{
+    font-size: 0.7rem;
+  }
+}

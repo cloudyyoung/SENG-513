@@ -114,10 +114,15 @@ function refreshPlayers() {
     document.querySelector(`.current-player .label`).innerHTML = current_player.name;
 
     // Display other players and their cards
-    app.getGame().players.forEach((player, player_index) => {
-        document.querySelector(`.players .player.${player.identifier} .hand`).innerHTML = `${player.cards.length} cards`;
-        document.querySelector(`.players .player.${player.identifier} .label`).innerHTML = player.name;
-    });
+    document.querySelector(`.players`).replaceChildren(...app.getGame().players.map((player, player_index) => {
+        const player_element = document.createElement("div");
+        player_element.classList.add("player", player.identifier);
+        player_element.innerHTML = `
+            <div class="label">${player.name}</div>
+            <div class="hand">${player.cards.length} cards</div>
+        `;
+        return player_element;
+    }));
 }
 
 function refreshBattlefield() {

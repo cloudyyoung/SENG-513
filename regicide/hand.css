@@ -1,0 +1,47 @@
+:root {
+  --current-player-bg-slice-width: 133px;
+  --current-player-bg-slice-height: 141px;
+}
+
+.current-player {
+  position: relative;
+  width: 46%;
+  margin: 0 auto;
+}
+
+.current-player .border.left, 
+.current-player .border.right,
+.current-player .border.middle {
+  position: absolute;
+}
+
+.current-player .border.left {
+  width: var(--current-player-bg-slice-width);
+  height: var(--current-player-bg-slice-height);
+  background-image: url('assets/hand/00.png');
+  background-position: bottom left;
+  background-repeat: no-repeat;
+  top: 0;
+  left: 0;
+}
+
+.current-player .border.right {
+  width: var(--current-player-bg-slice-width);
+  height: var(--current-player-bg-slice-height);
+  background-image: url('assets/hand/20.png');
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  top: 0;
+  right: 0;
+}
+
+.current-player .border.middle {
+  left: var(--current-player-bg-slice-width);
+  width: calc(100% - (var(--current-player-bg-slice-width) * 2));
+  height: var(--current-player-bg-slice-height);
+  background-size: 100% cover;
+  background-repeat: repeat-x;
+  background-image: url('assets/hand/10.png');
+  background-position: bottom center;
+  top: 0;
+}

@@ -6,6 +6,21 @@
  * UCID: 30067857
  */
 
+class App {
+    constructor() {
+        this.game = new Game(1);
+        this.number_of_players = 1;
+    }
+
+    createGame() {
+        this.game = new Game(this.number_of_players);
+    }
+
+    getGame() {
+        return this.game;
+    }
+}
+
 class Game {
     constructor(player_count) {
         // Initialize targets

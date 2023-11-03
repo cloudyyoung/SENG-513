@@ -18,9 +18,7 @@ Array.prototype.shuffle = function () {
     return this;
 }
 
-// Initialize a game instance with a given number of players
-let game = new Game(3);
-let number_of_players = 3;
+const app = new App();
 
 // Initialize the environment
 refreshEnvironment();
@@ -51,7 +49,7 @@ function refreshCard(card, card_element) {
 // It should show the cards that are currently in the tavern
 function refreshEnvironment() {
     // Make sure current enemy is revealed
-    const currentEnemy = game.getCurrentEnemy();
+    const currentEnemy = app.getGame().getCurrentEnemy();
     currentEnemy.card.reveal();
 
     // Display current enemy health and attack value
@@ -59,7 +57,7 @@ function refreshEnvironment() {
     document.querySelector(".castle-wrapper .values .value.attack .digit").innerHTML = currentEnemy.attack;
 
     // Display castle cards
-    document.querySelector(".castle").replaceChildren(...game.enemies.map(enemy => {
+    document.querySelector(".castle").replaceChildren(...app.getGame().enemies.map(enemy => {
         const card = enemy.card;
         const card_element = document.createElement("div");
         refreshCard(card, card_element);
@@ -71,11 +69,11 @@ function refreshEnvironment() {
     }).reverse());
 
     // Display tavern cards
-    document.querySelector(".tavern").replaceChildren(...game.tavern.map(card => {
+    document.querySelector(".tavern").replaceChildren(...app.getGame().tavern.map(card => {
         const card_element = document.createElement("div");
         refreshCard(card, card_element);
         card_element.addEventListener("click", () => {
-            game.getCurrentPlayer().addCard(game.drawTavernCard())
+            app.getGame().getCurrentPlayer().addCard(app.getGame().drawTavernCard())
             refreshPlayers();
             refreshEnvironment();
         });
@@ -83,7 +81,7 @@ function refreshEnvironment() {
     }).reverse());
 
     // Display Discrad pile
-    document.querySelector(".discard").replaceChildren(...game.discards.map(card => {
+    document.querySelector(".discard").replaceChildren(...app.getGame().discards.map(card => {
         const card_element = document.createElement("div");
         refreshCard(card, card_element);
         return card_element;
@@ -97,7 +95,7 @@ function refreshEnvironment() {
 // It should show the glance card view other players
 function refreshPlayers() {
     // Display current player and their cards
-    const current_player = game.getCurrentPlayer();
+    const current_player = app.getGame().getCurrentPlayer();
     const card_elements = current_player.cards.map(card => {
         card.reveal();
 
@@ -105,7 +103,7 @@ function refreshPlayers() {
         refreshCard(card, card_element);
         card_element.addEventListener("click", () => {
             card.reveal();
-            game.addBattlefieldCard(card);
+            app.getGame().addBattlefieldCard(card);
             current_player.dropCard(card);
             refreshBattlefield();
             refreshPlayers();
@@ -115,22 +113,22 @@ function refreshPlayers() {
     document.querySelector(`.current-player .hand`).replaceChildren(...card_elements);
     document.querySelector(`.current-player .label`).innerHTML = current_player.name;
 
-    // Display other players and their cards (glance view)
-    game.players.forEach((player, player_index) => {
+    // Display other players and their cards
+    app.getGame().players.forEach((player, player_index) => {
         document.querySelector(`.players .player.${player.identifier} .hand`).innerHTML = `${player.cards.length} cards`;
         document.querySelector(`.players .player.${player.identifier} .label`).innerHTML = player.name;
     });
 }
 
 function refreshBattlefield() {
-    document.querySelector(".battlefield").replaceChildren(...game.battlefield.map(card => {
+    document.querySelector(".battlefield").replaceChildren(...app.getGame().battlefield.map(card => {
         const card_element = document.createElement("div");
         refreshCard(card, card_element);
         return card_element;
     }));
     refreshResolveButton();
     document.querySelector(".battle .description").innerHTML =
-        `"${game.getCurrentPlayer().name}" is attacking "${game.getCurrentEnemy().name}" with ${game.battlefield.length} cards`;
+        `"${app.getGame().getCurrentPlayer().name}" is attacking "${app.getGame().getCurrentEnemy().name}" with ${app.getGame().battlefield.length} cards`;
 }
 
 function refreshResolveButton() {
@@ -146,17 +144,17 @@ function refreshResolveButton() {
     resolve_button.innerHTML = "Resolve";
     document.querySelector(".battle").appendChild(resolve_button);
     resolve_button.addEventListener("click", () => {
-        game.resolveBattlefield();
-        game.concludeTurn();
+        app.getGame().resolveBattlefield();
+        app.getGame().concludeTurn();
         refreshEnvironment();
         refreshBattlefield();
         refreshPlayers();
     });
 
     // Show resolve button if there are cards on the battlefield
-    if (game.battlefield.length > 0) {
+    if (app.getGame().battlefield.length > 0) {
         resolve_button.classList.remove("hide");
-        console.log(game.battlefield);
+        console.log(app.getGame().battlefield);
     } else {
         resolve_button.classList.add("hide");
     }
@@ -178,18 +176,17 @@ document.querySelector(".current-player .label").addEventListener("click", () =>
 
 document.querySelector(".menu .start").addEventListener("click", (e) => {
     document.querySelector(".menu-overlay").classList.add("hide");
-    game = new Game(number_of_players);
+    app.createGame();
+    refreshEnvironment();
+    refreshBattlefield();
+    refreshPlayers();
 })
 
 document.querySelectorAll(".menu .players-options .option").forEach(a => a.addEventListener("click", () => {
     number_of_players = parseInt(a.getAttribute("data-players"));
+    app.number_of_players = number_of_players;
     document.querySelectorAll(".menu .players-options .option.selected").forEach(b => {
         b.classList.remove("selected");
     })
     a.classList.add("selected");
 }))
-
-function endTurn() {
-    // TODO: Implement this
-    // This function should end the turn and switch to the next player
-}

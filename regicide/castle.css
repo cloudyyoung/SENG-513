@@ -12,6 +12,7 @@
   padding: 4rem 2rem 2.6em;
   margin: 0rem -2rem;
   position: relative;
+  z-index: 9;
 }
 
 .castle-wrapper .castle {

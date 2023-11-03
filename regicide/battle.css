@@ -8,7 +8,7 @@
   width: 70%;
   margin: 2rem auto;
   position: relative;
-  padding: 3rem 2rem 4rem;
+  padding: 3.6rem 2rem 4rem;
 }
 
 .battle .description {
@@ -115,8 +115,8 @@
   position: absolute;
   top: var(--battle-bg-slice-height);
   left: var(--battle-bg-slice-width);
-  width: calc(100% - (var(--battle-bg-slice-width) * 2));
-  height: calc(100% - (var(--battle-bg-slice-height) * 2));
+  width: calc(100% - (var(--battle-bg-slice-width) * 2) + 2px);
+  height: calc(100% - (var(--battle-bg-slice-height) * 2) + 2px);
   background-image: url("assets/battle/Blank_5.png");
   background-size: 100% 100%;
 }

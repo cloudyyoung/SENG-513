@@ -87,20 +87,12 @@
   padding: 0.6rem 0rem 1.4rem;
   z-index: 20;
   cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.2, 0.0, 0, 1.0);
 }
 
-/* .players .player .hand {
-  pointer-events: none;
-  min-height: calc(var(--card-height) * 0.6);
-} */
-
-/* .players .player .hand .card {
-  height: calc(var(--card-height) * 0.6);
-  width: calc(var(--card-width) * 0.6);
-  margin-left: -1rem;
-  margin-right: -1rem;
-  background-image: url("assets/backB.png");
-} */
+.current-player .label:hover {
+  transform: scale(1.1);
+}
 
 @media (max-width: 960px) {
   :root {

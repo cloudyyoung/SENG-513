@@ -45,3 +45,50 @@
   background-position: bottom center;
   top: 0;
 }
+
+.current-player {
+  margin-bottom: 2rem;
+}
+
+.current-player .hand {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  justify-content: center;
+  min-height: var(--card-height);
+}
+
+.current-player .hand .card {
+  margin-left: -0.4rem;
+  margin-right: -0.4rem;
+}
+
+.players {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
+  width: fit-content;
+  margin: auto;
+}
+
+.current-player .label {
+  margin-top: 0.6rem;
+  text-align: center;
+  background-image: url('assets/label/Header5.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0.6rem 0rem 1.4rem;
+}
+
+/* .players .player .hand {
+  pointer-events: none;
+  min-height: calc(var(--card-height) * 0.6);
+} */
+
+/* .players .player .hand .card {
+  height: calc(var(--card-height) * 0.6);
+  width: calc(var(--card-width) * 0.6);
+  margin-left: -1rem;
+  margin-right: -1rem;
+  background-image: url("assets/backB.png");
+} */

@@ -129,56 +129,6 @@ body {
     font-size: 0.9rem;
 }
 
-.current-player {
-    margin-bottom: 2rem;
-}
-
-.current-player .hand {
-    justify-content: center;
-    min-height: var(--card-height);
-}
-
-.current-player .hand .card {
-    margin-left: -0.4rem;
-    margin-right: -0.4rem;
-}
-
-.current-player .label {
-    text-align: center;
-}
-
-.players {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 4rem;
-    width: fit-content;
-    margin: auto;
-}
-
-.hand {
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    justify-items: center;
-}
-
-.label {
-    margin-top: 0.2rem;
-}
-
-.players .player .hand {
-    pointer-events: none;
-    min-height: calc(var(--card-height) * 0.6);
-}
-
-.players .player .hand .card {
-    height: calc(var(--card-height) * 0.6);
-    width: calc(var(--card-width) * 0.6);
-    margin-left: -1rem;
-    margin-right: -1rem;
-    background-image: url("assets/backB.png");
-}
-
 
 @media (max-width: 960px) {
     :root {

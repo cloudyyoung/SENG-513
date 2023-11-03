@@ -20,6 +20,7 @@ Array.prototype.shuffle = function () {
 
 // Initialize a game instance with a given number of players
 let game = new Game(3);
+let number_of_players = 3;
 
 // Initialize the environment
 refreshEnvironment();
@@ -175,10 +176,18 @@ document.querySelector(".current-player .label").addEventListener("click", () =>
     document.querySelector(".players-overlay").classList.remove("hide");
 })
 
-document.querySelector(".menu .start").addEventListener("click", () => {
+document.querySelector(".menu .start").addEventListener("click", (e) => {
     document.querySelector(".menu-overlay").classList.add("hide");
-    game = new Game(3);
+    game = new Game(number_of_players);
 })
+
+document.querySelectorAll(".menu .players-options .option").forEach(a => a.addEventListener("click", () => {
+    number_of_players = parseInt(a.getAttribute("data-players"));
+    document.querySelectorAll(".menu .players-options .option.selected").forEach(b => {
+        b.classList.remove("selected");
+    })
+    a.classList.add("selected");
+}))
 
 function endTurn() {
     // TODO: Implement this

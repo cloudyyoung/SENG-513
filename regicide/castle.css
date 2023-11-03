@@ -1,0 +1,87 @@
+:root {
+  --castle-bg-slice-width: 277px;
+  --castle-bg-slice-height: 114px;
+}
+
+.castle-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  justify-content: center;
+  justify-items: center;
+  padding: 5.2rem 2.4rem 2rem;
+  margin: 0rem -2rem;
+  position: relative;
+}
+
+.castle-wrapper .castle {
+  height: calc(var(--card-height) * 1.2);
+  width: calc(var(--card-width) * 1.2);
+}
+
+.castle-wrapper .castle .card {
+  height: calc(var(--card-height) * 1.2);
+  width: calc(var(--card-width) * 1.2);
+  margin-bottom: calc(var(--card-height) * -1.2);
+}
+
+.castle-wrapper .values {
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-items: center;
+  gap: 0.8rem;
+  color: #b80000;
+  text-shadow: 0px 0px 4px #fff, 0px 0px 8px #fff, 0px 0px 16px #fff, 0px 0px 20px #fff, 0px 0px 28px #fff, 0px 0px 32px #b80000;
+}
+
+.castle-wrapper .values .value {
+  display: flex;
+  flex-direction: column;
+}
+
+.castle-wrapper .values .value .digit {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.castle-wrapper .border {
+  position: absolute;
+  z-index: -1;
+}
+
+
+.castle-wrapper .border.top {
+  top: 0;
+  left: 0;
+  width: var(--castle-bg-slice-width);
+  height: var(--castle-bg-slice-height);
+  background-image: url('assets/castle/00.png');
+  background-size: contain;
+  background-repeat: repeat-x;
+  background-position: top center;
+}
+
+.castle-wrapper .border.bottom {
+  bottom: 0;
+  left: 0;
+  width: var(--castle-bg-slice-width);
+  height: var(--castle-bg-slice-height);
+  background-image: url('assets/castle/02.png');
+  background-repeat: repeat-x;
+  background-position: bottom center;
+}
+
+.castle-wrapper .border.middle {
+  top: var(--castle-bg-slice-height);
+  left: 0;
+  width: var(--castle-bg-slice-width);
+  height: calc(100% - (var(--castle-bg-slice-height) * 2));
+  background-image: url('assets/castle/01.png');
+  background-size: 100% 100%;
+  background-repeat: repeat;
+  background-position: center center;
+}
+

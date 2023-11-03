@@ -1,0 +1,98 @@
+
+:root {
+  --battle-bg-slice-width: 144px;
+  --battle-bg-slice-height: 103px;
+}
+
+.border {
+  position: absolute;
+  background-repeat: no-repeat;
+}
+
+.top-left {
+  width: var(--battle-bg-slice-width);
+  height: var(--battle-bg-slice-height);
+  background-image: url('assets/battle/Blank_1.png');
+  background-position: top left;
+  top: 0;
+  left: 0;
+}
+
+.top-right {
+  width: var(--battle-bg-slice-width);
+  height: var(--battle-bg-slice-height);
+  background-image: url("assets/battle/Blank_3.png");
+  background-position: top right;
+  top: 0;
+  right: 0;
+}
+
+.bottom-left {
+  width: var(--battle-bg-slice-width);
+  height: var(--battle-bg-slice-height);
+  background-image: url("assets/battle/Blank_7.png");
+  background-position: bottom left;
+  bottom: 0;
+  left: 0;
+}
+
+.bottom-right {
+  width: var(--battle-bg-slice-width);
+  height: var(--battle-bg-slice-height);
+  background-image: url("assets/battle/Blank_9.png");
+  background-position: bottom right;
+  bottom: 0;
+  right: 0;
+}
+
+.top,
+.bottom {
+  left: var(--battle-bg-slice-width);
+  width: calc(100% - (var(--battle-bg-slice-width) * 2));
+  height: var(--battle-bg-slice-height);
+  background-size: 100% cover;
+  background-repeat: repeat-x;
+}
+
+.top {
+  background-image: url("assets/battle/Blank_2.png");
+  background-position: top center;
+  top: 0;
+}
+
+.bottom {
+  background-image: url("assets/battle/Blank_8.png");
+  background-position: bottom center;
+  bottom: 0;
+}
+
+.left,
+.right {
+  top: var(--battle-bg-slice-height);
+  height: calc(100% - (var(--battle-bg-slice-height) * 2));
+  width: var(--battle-bg-slice-width);
+  background-size: cover 100%;
+  background-repeat: repeat-y;
+}
+
+.left {
+  background-image: url("assets/battle/Blank_4.png");
+  background-position: left center;
+  left: 0;
+}
+
+.right {
+  background-image: url("assets/battle/Blank_6.png");
+  background-position: right center;
+  right: 0;
+}
+
+.content {
+  position: absolute;
+  top: var(--battle-bg-slice-height);
+  left: var(--battle-bg-slice-width);
+  width: calc(100% - (var(--battle-bg-slice-width) * 2));
+  height: calc(100% - (var(--battle-bg-slice-height) * 2));
+  background-image: url("assets/battle/Blank_5.png");
+  background-size: 100% 100%;
+}

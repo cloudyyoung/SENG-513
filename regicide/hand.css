@@ -85,7 +85,9 @@
 }
 
 .current-player .label {
-  margin-top: 1.2rem;
+  position: absolute;
+  width: 100%;
+  bottom: -3.5rem;
   text-align: center;
   background-image: url('assets/label/Header5.png');
   background-position: center;

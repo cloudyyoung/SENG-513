@@ -97,6 +97,8 @@ class Game {
         });
 
         this.clearBattlefield();
+
+        this.nextPlayer();
     }
 }
 

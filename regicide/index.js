@@ -134,7 +134,8 @@ function refreshBattlefield() {
         return card_element;
     }));
     refreshResolveButton();
-    document.querySelector(".battle .description").innerHTML = `"${game.getCurrentPlayer().name}" is attacking "${game.getCurrentEnemy().name}" with ${game.battlefield.length} cards`;
+    document.querySelector(".battle .description").innerHTML =
+        `"${game.getCurrentPlayer().name}" is attacking "${game.getCurrentEnemy().name}" with ${game.battlefield.length} cards`;
 }
 
 function refreshResolveButton() {
@@ -154,6 +155,7 @@ function refreshResolveButton() {
         game.concludeTurn();
         refreshEnvironment();
         refreshBattlefield();
+        refreshPlayers();
     });
 
     // Show resolve button if there are cards on the battlefield

@@ -115,16 +115,10 @@ function refreshPlayers() {
     document.querySelector(`.current-player .label`).innerHTML = current_player.name;
 
     // Display other players and their cards (glance view)
-    // game.players.forEach((player, player_index) => {
-    //     const card_elements = game.players[player_index].cards.map(card => {
-    //         card.hide();
-    //         const card_element = document.createElement("div");
-    //         refreshCard(card, card_element);
-    //         return card_element;
-    //     });
-    //     document.querySelector(`.players .player.${player.identifier} .hand`).replaceChildren(...card_elements);
-    //     document.querySelector(`.players .player.${player.identifier} .label`).innerHTML = player.name;
-    // });
+    game.players.forEach((player, player_index) => {
+        document.querySelector(`.players .player.${player.identifier} .hand`).innerHTML = `${player.cards.length} cards`;
+        document.querySelector(`.players .player.${player.identifier} .label`).innerHTML = player.name;
+    });
 }
 
 function refreshBattlefield() {
@@ -172,6 +166,10 @@ window.addEventListener('resize', function () {
     refreshBattlefield();
     refreshPlayers();
 });
+
+document.querySelector(".overlay.players-overlay").addEventListener("click", () => {
+    document.querySelector(".players-overlay").classList.add("hide");
+})
 
 function endTurn() {
     // TODO: Implement this

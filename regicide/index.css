@@ -83,6 +83,23 @@ body {
     font-size: 0.9rem;
 }
 
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000a0;
+    z-index: 50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay.hide {
+    display: none;
+}
+
 
 @media (max-width: 960px) {
     :root {

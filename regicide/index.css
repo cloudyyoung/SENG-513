@@ -102,6 +102,6 @@ body {
     }
 
     body {
-        grid-template-rows: 210px 1fr 190px;
+        grid-template-rows: 180px 1fr 190px;
     }
 }

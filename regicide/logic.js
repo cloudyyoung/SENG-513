@@ -230,6 +230,9 @@ class Game {
         }
 
         console.log(this.logs);
+    }
+
+    clearLogs() {
         this.logs = [];
     }
 

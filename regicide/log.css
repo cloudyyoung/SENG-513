@@ -1,0 +1,60 @@
+/* Course: SENG 513 */
+/* Date: NOV 12, 2023 */
+/* Assignment 3 */
+/* Name: Yunfan Yang */
+/* UCID: 30067857 */
+
+:root {
+  --log-loglay-bg-original-width: 276px;
+  --log-loglay-bg-original-height: 340px;
+  --log-loglay-bg-size-ratio: 1.8;
+  --log-loglay-bg-width: calc(var(--log-loglay-bg-original-width) * var(--log-loglay-bg-size-ratio));
+  --log-loglay-bg-height: calc(var(--log-loglay-bg-original-height) * var(--log-loglay-bg-size-ratio));
+}
+
+.logs-wrapper {
+  background-image: url("assets/Scroll3.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 30;
+  height: var(--log-loglay-bg-height);
+  width: var(--log-loglay-bg-width);
+  padding: 9rem 4.4rem;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.logs-wrapper .title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.logs-wrapper .logs {
+  overflow-y: auto;
+}
+
+.logs-wrapper .buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 5.4rem;
+}
+
+.logs-wrapper .confirm {
+  padding: 0.5rem 0.8rem;
+  background-color: #903B2F;
+  border: #5B2934 0.32rem solid;
+  border-radius: 1rem;
+  font-size: 1.1rem;
+  transition: all 0.2s ease-in-out;
+  color: white;
+}

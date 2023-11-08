@@ -95,6 +95,11 @@ function refreshEnvironment() {
 // It should show the current player
 // It should show the glance card view other players
 function refreshPlayers() {
+    // Check game phase
+    if (app.getGame().phase === Phase.OVER) {
+        return;
+    }
+
     // Get current player attribute
     const currentPlayerHand = document.querySelector(".current-player .label").getAttribute("data-identifier");
     const currentPlayer = app.getGame().getCurrentPlayer();
@@ -176,10 +181,7 @@ function refreshResolveButton() {
     resolveButton.addEventListener("click", () => {
         app.getGame().resolveBattlefield();
         app.getGame().concludeTurn();
-        refreshEnvironment();
-        refreshBattlefield();
-        refreshPlayers();
-        showTurnMessage();
+        showGameLogs();
     });
 
     // Show resolve button if there are cards on the battlefield
@@ -213,8 +215,6 @@ function refreshYieldButton() {
         app.getGame().concludeTurn();
         refreshBattlefield();
         showTurnMessage();
-
-        console.log(app.getGame().phase);
     });
 }
 
@@ -235,6 +235,34 @@ function showOverMessage() {
     const [title, description] = app.getGame().getOverMessage();
     document.querySelector(".over-overlay .title").innerHTML = title;
     document.querySelector(".over-overlay .description").innerHTML = description;
+}
+
+function showGameLogs() {
+    document.querySelector(".logs-overlay").classList.remove("hide");
+    document.querySelector(".logs-overlay .logs").innerHTML = app.getGame().logs.map(log => {
+        return `<div class="log">${log}.</div>`;
+    }).join("");
+
+    // Delete existing confirm button
+    const existingConfirmButton = document.querySelector(".logs-overlay .confirm");
+    if (existingConfirmButton) {
+        existingConfirmButton.remove();
+    }
+
+    // Create confirm button
+    const confirmButton = document.createElement("button");
+    confirmButton.classList.add("confirm");
+    confirmButton.innerHTML = "Confirm";
+    document.querySelector(".logs-overlay .buttons").appendChild(confirmButton);
+    confirmButton.addEventListener("click", () => {
+        document.querySelector(".logs-overlay").classList.add("hide");
+
+        app.getGame().clearLogs();
+        refreshEnvironment();
+        refreshBattlefield();
+        refreshPlayers();
+        showTurnMessage();
+    });
 }
 
 window.addEventListener('resize', function () {

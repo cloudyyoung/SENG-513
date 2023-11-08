@@ -31,7 +31,6 @@ class Game {
 
         // Battlefield stats
         this.attacker = null;
-        this.battlefieldMultiplier = 1;
 
         // Yield count
         this.yield_count = 0;
@@ -51,7 +50,7 @@ class Game {
         this.tavern = tavern_ranks.flatMap(rank => {
             return tavern_suits.flatMap(suit => {
                 const name = `${suit} ${rank}`;
-                const card = new Card(name, suit, rank);
+                const card = new Card(name, suit, rank, rank);
                 return card;
             }).shuffle();
         }).shuffle();
@@ -116,8 +115,12 @@ class Game {
         }
     }
 
-    getBattlefieldCardValue() {
-        return Card.getTotalRank(this.battlefield);
+    getBattlefieldAttackValue() {
+        return Card.getTotalAttack(this.battlefield);
+    }
+
+    getBattlefieldDefendValue() {
+        return Card.getTotalDefend(this.battlefield);
     }
 
     resolveBattlefield() {
@@ -129,22 +132,22 @@ class Game {
             this.battlefield.forEach(card => {
                 if (card.suit !== currentEnemySuit) {
                     const power = card.getPower();
-                    power(this);
+                    power(this, card);
                 }
             });
         }
 
         // Resolve damage
-        const totalCardValue = this.getBattlefieldCardValue() * this.battlefieldMultiplier;
-
         if (this.attacker instanceof Player) {
             // When players attack, they deal total card value damage to the enemy
+            const totalAttackValue = this.getBattlefieldAttackValue();
             const currentEnemy = this.getCurrentEnemy();
-            currentEnemy.takeDamage(totalCardValue);
+            currentEnemy.takeDamage(totalAttackValue);
         } else {
             // When enemies attack, they deal enemy attack damage, but players defend with total card value
+            const totalDefendValue = this.getBattlefieldDefendValue();
             const currentPlayer = this.getCurrentPlayer();
-            currentPlayer.takeDamage(this.attacker.attack - totalCardValue);
+            currentPlayer.takeDamage(this.attacker.attack - totalDefendValue);
         }
     }
 
@@ -180,7 +183,6 @@ class Game {
             this.discardCard(card);
         });
         this.clearBattlefield();
-        this.battlefieldMultiplier = 1;
 
         // If enemy is dead, switch to the next enemy and next player attacks first
         if (this.getCurrentEnemy().isDead()) {
@@ -205,13 +207,14 @@ class Game {
         const playerName = this.getCurrentPlayer().name;
         const enemyName = this.getCurrentEnemy().name;
         const battlefieldSize = this.battlefield.length;
-        const battlefieldCardValue = this.getBattlefieldCardValue();
 
         if (this.attacker instanceof Player) {
-            return `"${playerName}" is attacking "${enemyName}" with ${battlefieldCardValue} attack value (${battlefieldSize} cards)`;
+            const battlefieldAttackValue = this.getBattlefieldAttackValue();
+            return `"${playerName}" is attacking "${enemyName}" with ${battlefieldAttackValue} attack value (${battlefieldSize} cards)`;
         } else {
             const attack_value = this.getCurrentEnemy().attack;
-            return `"${enemyName}" is attacking "${playerName}" with ${attack_value} damage, and "${playerName}" is defending with ${battlefieldCardValue} defend value (${battlefieldSize} cards)`;
+            const battlefieldDefendValue = this.getBattlefieldDefendValue();
+            return `"${enemyName}" is attacking "${playerName}" with ${attack_value} damage, and "${playerName}" is defending with ${battlefieldDefendValue} defend value (${battlefieldSize} cards)`;
         }
     }
 
@@ -293,6 +296,10 @@ class Enemy extends Target {
         this.card = card;
     }
 
+    takeDefend(defend) {
+        this.attack = Math.max(0, this.attack - defend);
+    }
+
     static initialize() {
         const enemies_rank = [Rank.JACK, Rank.QUEEN, Rank.KING];
         const enemies_suits = [Suit.HEARTS, Suit.SPADES, Suit.CLUBS, Suit.DIAMONDS];
@@ -307,7 +314,7 @@ class Enemy extends Target {
                 const { health, attack, rank_name } = lookup_table[rank];
                 const suit_name = suit.charAt(0).toUpperCase() + suit.slice(1);
                 const name = `${suit_name} ${rank_name}`;
-                const card = new Card(name, suit, rank);
+                const card = new Card(name, suit, rank, attack);
                 return new Enemy(name, health, attack, card);
             }).shuffle();
         });
@@ -315,10 +322,12 @@ class Enemy extends Target {
 }
 
 class Card {
-    constructor(name, suit, rank) {
+    constructor(name, suit, rank, attack) {
         this.name = name;
         this.suit = suit;
         this.rank = rank;
+        this.attack = attack;
+        this.defend = attack;
         this.facing = Facing.DOWN;
     }
 
@@ -342,9 +351,14 @@ class Card {
         return SuitPower[this.suit];
     }
 
-    static getTotalRank(cards) {
-        const total_rank = cards.reduce((acc, card) => acc + card.rank, 0);
-        return total_rank;
+    static getTotalAttack(cards) {
+        const total_attack = cards.reduce((acc, card) => acc + card.attack, 0);
+        return total_attack;
+    }
+
+    static getTotalDefend(cards) {
+        const total_defend = cards.reduce((acc, card) => acc + card.defend, 0);
+        return total_defend;
     }
 }
 
@@ -356,20 +370,20 @@ const Suit = {
 }
 
 const SuitPower = {
-    "heart": (game) => {
+    "heart": (game, card) => {
         // Heal from the discard: Shuffle the discard pile then 
         // count out a number of cards facedown equal to the
         // attack value played. Place them under the Tavern
         // deck(no peeking!) then, return the discard pile to
         // the table, faceup.
-        const battlefieldCardValue = game.getBattlefieldCardValue();
+        const battlefieldCardValue = card.attack;
         const discardCardsNumber = battlefieldCardValue;
 
         // Shuffle the discard pile, and put them at the top of the tavern
         game.discards.shuffle();
         game.tavern.unshift(...game.discards.splice(0, discardCardsNumber));
     },
-    "diamond": (game) => {
+    "diamond": (game, card) => {
         // Draw cards: The current player draws a card. The 
         // other players follow in clockwise order drawing one
         // card at a time until a number of cards equal to the
@@ -378,48 +392,52 @@ const SuitPower = {
         // Players may never draw cards over their maximum
         // hand size.There is no penalty for failing to draw
         // cards from an empty Tavern deck.
-        const drawCardsNumber = game.getBattlefieldCardValue();
+        const drawCardsNumber = card.attack;
         const drawDeck = game.tavern.slice(0, drawCardsNumber);
+        let cardsDrawn = 0;
+        let currentPlayerIndex = game.current_player_index;
 
-        console.log(drawDeck);
+        while (cardsDrawn < drawCardsNumber && drawDeck.length > 0) {
+            let player = game.players[currentPlayerIndex];
+            let maxCards = PlayerConfigurations[game.players.length].max_cards;
 
-        while (drawDeck.length > 0) {
-            console.log(drawDeck);
+            // Draw a card if the player hasn't reached their maximum hand size
+            if (player.cards.length < maxCards) {
+                player.cards.push(drawDeck.shift());
+                cardsDrawn++;
+            }
 
-            game.players.forEach(player => {
-                if (player.isHandFull()) {
-                    return; // Skip if the player's hand is full
+            // Move to the next player in a clockwise order
+            currentPlayerIndex = (currentPlayerIndex + 1) % game.players.length;
+
+            // Check if we have completed a full round (back to the starting player)
+            if (currentPlayerIndex === game.current_player_index) {
+                const allPlayerMaximumHandSize = game.players.every(player => player.isHandFull());
+                if (allPlayerMaximumHandSize) {
+                    break; // Stop the process if everyone has maximum hand size
                 }
-
-                const card = drawDeck.shift();
-                player.addCard(card);
-            });
-
-            const allPlayerMaximumHandSize = game.players.every(player => player.isHandFull());
-            if (allPlayerMaximumHandSize) {
-                break; // Stop the process if everyone has maximum hand size
             }
         }
 
-        // Put unused cards back to the tavern
-        game.tavern.unshift(...drawDeck);
+        // Update the game's tavern deck by removing the drawn cards
+        game.tavern.splice(0, cardsDrawn);
     },
-    "club": (game) => {
+    "club": (_, card) => {
         // Double damage: During Step 3, damage dealt by 
         // clubs counts for double.E.g., The 8 of Clubs deals 16
         // damage.
-        game.battlefieldMultiplier = 2;
+        card.attack = card.defend * 2;
     },
-    "spade": (game) => {
+    "spade": (game, card) => {
         // Shield against enemy attack: During Step 4, reduce 
         // the attack value of the current enemy by the attack
         // value played.The shield effects of spades are
         // cumulative for all spades played against this enemy
         // by any player, and remain in effect until the enemy
         // is defeated.
-        const battlefieldCardValue = game.getBattlefieldCardValue();
+        const battlefieldCardValue = card.attack;
         const currentEnemy = game.getCurrentEnemy();
-        currentEnemy.attack -= battlefieldCardValue;
+        currentEnemy.takeDefend(battlefieldCardValue);
     }
 }
 

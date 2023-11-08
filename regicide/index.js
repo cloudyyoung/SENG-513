@@ -149,7 +149,11 @@ function refreshResolveButton() {
     // Create resolve button
     const resolve_button = document.createElement("button");
     resolve_button.classList.add("resolve");
-    resolve_button.innerHTML = "Resolve";
+    if (app.getGame().getAttackerType() === "Player") {
+        resolve_button.innerHTML = "Attack";
+    } else {
+        resolve_button.innerHTML = "Defend";
+    }
     document.querySelector(".battle .buttons").appendChild(resolve_button);
     resolve_button.addEventListener("click", () => {
         app.getGame().resolveBattlefield();

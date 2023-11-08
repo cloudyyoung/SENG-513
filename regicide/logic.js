@@ -415,7 +415,7 @@ const SuitPower = {
 
         while (cardsDrawn < drawCardsNumber && drawDeck.length > 0) {
             let player = game.players[currentPlayerIndex];
-            let maxCards = PlayerConfigurations[game.players.length].maxCards;
+            let maxCards = player.maxCards
 
             // Draw a card if the player hasn't reached their maximum hand size
             if (player.cards.length < maxCards) {

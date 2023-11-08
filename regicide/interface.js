@@ -30,17 +30,17 @@ refreshPlayers();
 // It should show the card if it is facing up
 // It should hide the card if it is facing down
 // It should add the appropriate classes to the card element
-function refreshCard(card, card_element) {
-    if (card_element.classList.contains("hide") && card.facing === Facing.UP) {
-        card_element.classList.add("flip");
+function refreshCard(card, cardElement) {
+    if (cardElement.classList.contains("hide") && card.facing === Facing.UP) {
+        cardElement.classList.add("flip");
         setTimeout(() => {
-            card_element.classList.remove("flip");
+            cardElement.classList.remove("flip");
         }, 500);
     }
 
-    card_element.classList.remove("hide", "reveal");
-    card_element.classList.add(card.facing === Facing.DOWN ? "hide" : "reveal");
-    card_element.classList.add("card", `${card.suit}-${card.rank}`);
+    cardElement.classList.remove("hide", "reveal");
+    cardElement.classList.add(card.facing === Facing.DOWN ? "hide" : "reveal");
+    cardElement.classList.add("card", `${card.suit}-${card.rank}`);
 }
 
 // Refresh environment
@@ -59,27 +59,27 @@ function refreshEnvironment() {
     // Display castle cards
     document.querySelector(".castle").replaceChildren(...app.getGame().enemies.map(enemy => {
         const card = enemy.card;
-        const card_element = document.createElement("div");
-        refreshCard(card, card_element);
-        card_element.addEventListener("click", () => {
+        const cardElement = document.createElement("div");
+        refreshCard(card, cardElement);
+        cardElement.addEventListener("click", () => {
             card.reveal();
-            refreshCard(card, card_element);
+            refreshCard(card, cardElement);
         });
-        return card_element;
+        return cardElement;
     }).reverse());
 
     // Display tavern cards
     document.querySelector(".tavern").replaceChildren(...app.getGame().tavern.map(card => {
-        const card_element = document.createElement("div");
-        refreshCard(card, card_element);
-        return card_element;
+        const cardElement = document.createElement("div");
+        refreshCard(card, cardElement);
+        return cardElement;
     }).reverse());
 
     // Display Discrad pile
     document.querySelector(".discard").replaceChildren(...app.getGame().discards.map(card => {
-        const card_element = document.createElement("div");
-        refreshCard(card, card_element);
-        return card_element;
+        const cardElement = document.createElement("div");
+        refreshCard(card, cardElement);
+        return cardElement;
     }).reverse());
 }
 
@@ -90,49 +90,49 @@ function refreshEnvironment() {
 // It should show the glance card view other players
 function refreshPlayers() {
     // Display current player and their cards
-    const current_player = app.getGame().getCurrentPlayer();
-    const card_elements = current_player.cards.map(card => {
+    const currentPlayer = app.getGame().getCurrentPlayer();
+    const cardElements = currentPlayer.cards.map(card => {
         card.reveal();
 
-        const card_element = document.createElement("div");
-        refreshCard(card, card_element);
-        card_element.addEventListener("click", () => {
+        const cardElement = document.createElement("div");
+        refreshCard(card, cardElement);
+        cardElement.addEventListener("click", () => {
             card.reveal();
             app.getGame().addBattlefieldCard(card);
-            current_player.dropCard(card);
+            currentPlayer.dropCard(card);
             refreshBattlefield();
             refreshPlayers();
         });
-        return card_element;
+        return cardElement;
     });
-    document.querySelector(`.current-player .hand`).replaceChildren(...card_elements);
-    document.querySelector(`.current-player .label`).setAttribute("data-identifier", current_player.identifier);
-    document.querySelector(`.current-player .label`).innerHTML = current_player.name;
+    document.querySelector(`.current-player .hand`).replaceChildren(...cardElements);
+    document.querySelector(`.current-player .label`).setAttribute("data-identifier", currentPlayer.identifier);
+    document.querySelector(`.current-player .label`).innerHTML = currentPlayer.name;
 
     // Display other players and their cards
-    document.querySelector(".max-cards").innerHTML = `Max ${app.getGame().players[0].max_cards} cards per player`;
-    document.querySelector(`.players`).replaceChildren(...app.getGame().players.map((player, player_index) => {
-        const player_element = document.createElement("div");
-        player_element.classList.add("player", player.identifier);
-        player_element.innerHTML = `
+    document.querySelector(".max-cards").innerHTML = `Max ${app.getGame().players[0].maxCards} cards per player`;
+    document.querySelector(`.players`).replaceChildren(...app.getGame().players.map(player => {
+        const playerElement = document.createElement("div");
+        playerElement.classList.add("player", player.identifier);
+        playerElement.innerHTML = `
             <div class="label">${player.name}</div>
             <div class="hand">${player.cards.length} cards</div>
         `;
-        return player_element;
+        return playerElement;
     }));
 }
 
 function refreshBattlefield() {
     document.querySelector(".battlefield").replaceChildren(...app.getGame().battlefield.map(card => {
-        const card_element = document.createElement("div");
-        refreshCard(card, card_element);
-        card_element.addEventListener("click", () => {
+        const cardElement = document.createElement("div");
+        refreshCard(card, cardElement);
+        cardElement.addEventListener("click", () => {
             app.getGame().removeBattlefieldCard(card);
             app.getGame().getCurrentPlayer().addCard(card);
             refreshBattlefield();
             refreshPlayers();
         });
-        return card_element;
+        return cardElement;
     }));
     refreshResolveButton();
     refreshYieldButton();
@@ -141,21 +141,21 @@ function refreshBattlefield() {
 
 function refreshResolveButton() {
     // Remove existing resolve button
-    const existing_resolve_button = document.querySelector(".battle .resolve");
-    if (existing_resolve_button) {
-        existing_resolve_button.remove();
+    const existingResolveButton = document.querySelector(".battle .resolve");
+    if (existingResolveButton) {
+        existingResolveButton.remove();
     }
 
     // Create resolve button
-    const resolve_button = document.createElement("button");
-    resolve_button.classList.add("resolve");
+    const resolveButton = document.createElement("button");
+    resolveButton.classList.add("resolve");
     if (app.getGame().getAttackerType() === "Player") {
-        resolve_button.innerHTML = "Attack";
+        resolveButton.innerHTML = "Attack";
     } else {
-        resolve_button.innerHTML = "Defend";
+        resolveButton.innerHTML = "Defend";
     }
-    document.querySelector(".battle .buttons").appendChild(resolve_button);
-    resolve_button.addEventListener("click", () => {
+    document.querySelector(".battle .buttons").appendChild(resolveButton);
+    resolveButton.addEventListener("click", () => {
         app.getGame().resolveBattlefield();
         app.getGame().concludeTurn();
         refreshEnvironment();
@@ -166,18 +166,18 @@ function refreshResolveButton() {
 
     // Show resolve button if there are cards on the battlefield
     if (app.getGame().battlefield.length > 0) {
-        resolve_button.classList.remove("hide");
+        resolveButton.classList.remove("hide");
         console.log(app.getGame().battlefield);
     } else {
-        resolve_button.classList.add("hide");
+        resolveButton.classList.add("hide");
     }
 }
 
 function refreshYieldButton() {
     // Remove existing yield button
-    const existing_yield_button = document.querySelector(".battle .yield");
-    if (existing_yield_button) {
-        existing_yield_button.remove();
+    const existingYieldButton = document.querySelector(".battle .yield");
+    if (existingYieldButton) {
+        existingYieldButton.remove();
     }
 
     // If the current turn is not player's turn, do not show yield button
@@ -186,11 +186,11 @@ function refreshYieldButton() {
     }
 
     // Create yield button
-    const yield_button = document.createElement("button");
-    yield_button.classList.add("yield");
-    yield_button.innerHTML = "Yield";
-    document.querySelector(".battle .buttons").appendChild(yield_button);
-    yield_button.addEventListener("click", () => {
+    const yieldButton = document.createElement("button");
+    yieldButton.classList.add("yield");
+    yieldButton.innerHTML = "Yield";
+    document.querySelector(".battle .buttons").appendChild(yieldButton);
+    yieldButton.addEventListener("click", () => {
         app.getGame().yieldBattlefield();
         app.getGame().concludeTurn();
         refreshBattlefield();
@@ -232,8 +232,8 @@ document.querySelector(".menu .start").addEventListener("click", (e) => {
 })
 
 document.querySelectorAll(".menu .players-options .option").forEach(a => a.addEventListener("click", () => {
-    number_of_players = parseInt(a.getAttribute("data-players"));
-    app.number_of_players = number_of_players;
+    numberOfPlayers = parseInt(a.getAttribute("data-players"));
+    app.numberOfPlayers = numberOfPlayers;
     document.querySelectorAll(".menu .players-options .option.selected").forEach(b => {
         b.classList.remove("selected");
     })

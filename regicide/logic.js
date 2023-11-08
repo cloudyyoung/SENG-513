@@ -9,11 +9,11 @@
 class App {
     constructor() {
         this.game = new Game(1);
-        this.number_of_players = 1;
+        this.numberOfPlayers = 1;
     }
 
     createGame() {
-        this.game = new Game(this.number_of_players);
+        this.game = new Game(this.numberOfPlayers);
     }
 
     getGame() {
@@ -22,9 +22,9 @@ class App {
 }
 
 class Game {
-    constructor(player_count) {
+    constructor(playerCount) {
         // Initialize targets
-        this.players = Player.initialize(player_count);
+        this.players = Player.initialize(playerCount);
         this.enemies = Enemy.initialize();
         this.discards = [];
         this.battlefield = [];
@@ -33,22 +33,22 @@ class Game {
         this.attacker = null;
 
         // Yield count
-        this.yield_count = 0;
+        this.yieldCount = 0;
 
         // Set current player and enemy
-        this.current_player_index = 0;
+        this.currentPlayerIndex = 0;
 
         // Game phase
         this.phase = Phase.STARTED;
 
         // Initialize tavern
-        const tavern_ranks = [
+        const tavernRanks = [
             Rank.ACE, Rank.TWO, Rank.THREE, Rank.FOUR, Rank.FIVE,
             Rank.SIX, Rank.SEVEN, Rank.EIGHT, Rank.NINE, Rank.TEN,
         ];
-        const tavern_suits = [Suit.HEARTS, Suit.SPADES, Suit.CLUBS, Suit.DIAMONDS];
-        this.tavern = tavern_ranks.flatMap(rank => {
-            return tavern_suits.flatMap(suit => {
+        const tavernSuits = [Suit.HEARTS, Suit.SPADES, Suit.CLUBS, Suit.DIAMONDS];
+        this.tavern = tavernRanks.flatMap(rank => {
+            return tavernSuits.flatMap(suit => {
                 const name = `${suit} ${rank}`;
                 const card = new Card(name, suit, rank, rank);
                 return card;
@@ -68,9 +68,9 @@ class Game {
     }
 
     nextPlayer() {
-        this.current_player_index = (this.current_player_index + 1) % this.players.length;
-        if (this.current_player_index === 0) {
-            this.yield_count = 0;
+        this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
+        if (this.currentPlayerIndex === 0) {
+            this.yieldCount = 0;
         }
         return this.getCurrentPlayer();
     }
@@ -84,7 +84,7 @@ class Game {
     }
 
     getCurrentPlayer() {
-        return this.players[this.current_player_index];
+        return this.players[this.currentPlayerIndex];
     }
 
     getCurrentEnemy() {
@@ -108,7 +108,7 @@ class Game {
     }
 
     yieldBattlefield() {
-        this.yield_count += 1;
+        this.yieldCount += 1;
         // If all players have yielded in the same round, game over
         if (this.yield === this.players.length) {
             this.phase = Phase.OVER;
@@ -163,13 +163,13 @@ class Game {
         }
     }
 
-    switchAttacker(force_player = false) {
+    switchAttacker(forcePlayer = false) {
         // `force_player` is used to force the attacker to be the player
 
         // If the attacker is a player, switch to the enemy
         // If the attacker is an enemy, switch to the next player
         // If force_player is true, switch to the next player regardless of the attacker
-        if (this.attacker instanceof Player && !force_player) {
+        if (this.attacker instanceof Player && !forcePlayer) {
             this.attacker = this.getCurrentEnemy();
         } else {
             const nextPlayer = this.nextPlayer();
@@ -212,9 +212,9 @@ class Game {
             const battlefieldAttackValue = this.getBattlefieldAttackValue();
             return `"${playerName}" is attacking "${enemyName}" with ${battlefieldAttackValue} attack value (${battlefieldSize} cards)`;
         } else {
-            const attack_value = this.getCurrentEnemy().attack;
+            const attackValue = this.getCurrentEnemy().attack;
             const battlefieldDefendValue = this.getBattlefieldDefendValue();
-            return `"${enemyName}" is attacking "${playerName}" with ${attack_value} damage, and "${playerName}" is defending with ${battlefieldDefendValue} defend value (${battlefieldSize} cards)`;
+            return `"${enemyName}" is attacking "${playerName}" with ${attackValue} damage, and "${playerName}" is defending with ${battlefieldDefendValue} defend value (${battlefieldSize} cards)`;
         }
     }
 
@@ -258,11 +258,11 @@ class Target {
 }
 
 class Player extends Target {
-    constructor(name, identifier, max_cards = 8) {
+    constructor(name, identifier, maxCards = 8) {
         super(name, 1);
         this.identifier = identifier;
         this.cards = [];
-        this.max_cards = max_cards;
+        this.maxCards = maxCards;
     }
 
     addCard(card) {
@@ -280,12 +280,12 @@ class Player extends Target {
     }
 
     isHandFull() {
-        return this.cards.length >= this.max_cards;
+        return this.cards.length >= this.maxCards;
     }
 
-    static initialize(player_count) {
-        const { max_cards } = PlayerConfigurations[player_count];
-        return Array(player_count).fill().map((_, i) => new Player(`Player ${i + 1}`, `p${i + 1}`, max_cards));
+    static initialize(playerCount) {
+        const { max_cards } = PlayerConfigurations[playerCount];
+        return Array(playerCount).fill().map((_, i) => new Player(`Player ${i + 1}`, `p${i + 1}`, max_cards));
     }
 }
 
@@ -301,19 +301,19 @@ class Enemy extends Target {
     }
 
     static initialize() {
-        const enemies_rank = [Rank.JACK, Rank.QUEEN, Rank.KING];
-        const enemies_suits = [Suit.HEARTS, Suit.SPADES, Suit.CLUBS, Suit.DIAMONDS];
-        const lookup_table = {
+        const enemiesRank = [Rank.JACK, Rank.QUEEN, Rank.KING];
+        const enemiesSuits = [Suit.HEARTS, Suit.SPADES, Suit.CLUBS, Suit.DIAMONDS];
+        const lookupTable = {
             [Rank.JACK]: { health: 20, attack: 10, rank_name: "Jack" },
             [Rank.QUEEN]: { health: 30, attack: 15, rank_name: "Queen" },
             [Rank.KING]: { health: 40, attack: 20, rank_name: "King" }
         }
 
-        return enemies_rank.flatMap(rank => {
-            return enemies_suits.flatMap(suit => {
-                const { health, attack, rank_name } = lookup_table[rank];
-                const suit_name = suit.charAt(0).toUpperCase() + suit.slice(1);
-                const name = `${suit_name} ${rank_name}`;
+        return enemiesRank.flatMap(rank => {
+            return enemiesSuits.flatMap(suit => {
+                const { health, attack, rank_name } = lookupTable[rank];
+                const suitName = suit.charAt(0).toUpperCase() + suit.slice(1);
+                const name = `${suitName} ${rank_name}`;
                 const card = new Card(name, suit, rank, attack);
                 return new Enemy(name, health, attack, card);
             }).shuffle();
@@ -352,13 +352,13 @@ class Card {
     }
 
     static getTotalAttack(cards) {
-        const total_attack = cards.reduce((acc, card) => acc + card.attack, 0);
-        return total_attack;
+        const totalAttack = cards.reduce((acc, card) => acc + card.attack, 0);
+        return totalAttack;
     }
 
     static getTotalDefend(cards) {
-        const total_defend = cards.reduce((acc, card) => acc + card.defend, 0);
-        return total_defend;
+        const totalDefend = cards.reduce((acc, card) => acc + card.defend, 0);
+        return totalDefend;
     }
 }
 
@@ -395,11 +395,11 @@ const SuitPower = {
         const drawCardsNumber = card.attack;
         const drawDeck = game.tavern.slice(0, drawCardsNumber);
         let cardsDrawn = 0;
-        let currentPlayerIndex = game.current_player_index;
+        let currentPlayerIndex = game.currentPlayerIndex;
 
         while (cardsDrawn < drawCardsNumber && drawDeck.length > 0) {
             let player = game.players[currentPlayerIndex];
-            let maxCards = PlayerConfigurations[game.players.length].max_cards;
+            let maxCards = PlayerConfigurations[game.players.length].maxCards;
 
             // Draw a card if the player hasn't reached their maximum hand size
             if (player.cards.length < maxCards) {
@@ -411,7 +411,7 @@ const SuitPower = {
             currentPlayerIndex = (currentPlayerIndex + 1) % game.players.length;
 
             // Check if we have completed a full round (back to the starting player)
-            if (currentPlayerIndex === game.current_player_index) {
+            if (currentPlayerIndex === game.currentPlayerIndex) {
                 const allPlayerMaximumHandSize = game.players.every(player => player.isHandFull());
                 if (allPlayerMaximumHandSize) {
                     break; // Stop the process if everyone has maximum hand size

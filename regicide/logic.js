@@ -52,9 +52,9 @@ class Game {
         const tavernSuits = [Suit.HEARTS, Suit.SPADES, Suit.CLUBS, Suit.DIAMONDS];
         this.tavern = tavernRanks.flatMap(rank => {
             return tavernSuits.flatMap(suit => {
-                const name = `${suit} ${rank}`;
                 const suitName = suit.charAt(0).toUpperCase() + suit.slice(1);
-                const card = new Card(suitName, suit, rank, rank);
+                const name = `${suitName} ${rank}`;
+                const card = new Card(name, suit, rank, rank);
                 return card;
             }).shuffle();
         }).shuffle();

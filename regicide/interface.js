@@ -48,6 +48,12 @@ function refreshCard(card, cardElement) {
 // It should show the enemies that are currently on the castle
 // It should show the cards that are currently in the tavern
 function refreshEnvironment() {
+    // Check game phase
+    if (app.getGame().phase === Phase.OVER) {
+        showOverMessage();
+        return;
+    }
+
     // Make sure current enemy is revealed
     const currentEnemy = app.getGame().getCurrentEnemy();
     currentEnemy.card.reveal();
@@ -201,11 +207,22 @@ function refreshYieldButton() {
 }
 
 function showTurnMessage() {
+    if (app.getGame().phase === Phase.OVER) {
+        return;
+    }
+
     document.querySelector(".turn-overlay").classList.remove("hide");
     document.querySelector(".turn-overlay .title").innerHTML = app.getGame().getTurnMessage();
     setTimeout(() => {
         document.querySelector(".turn-overlay").classList.add("hide");
     }, 1500);
+}
+
+function showOverMessage() {
+    document.querySelector(".over-overlay").classList.remove("hide");
+    const [title, description] = app.getGame().getOverMessage();
+    document.querySelector(".over-overlay .title").innerHTML = title;
+    document.querySelector(".over-overlay .description").innerHTML = description;
 }
 
 window.addEventListener('resize', function () {

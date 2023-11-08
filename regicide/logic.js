@@ -201,6 +201,11 @@ class Game {
                 this.phase = Phase.OVER;
             }
         });
+
+        // Make sure there are still enemies
+        if (this.enemies.length === 0) {
+            this.phase = Phase.OVER;
+        }
     }
 
     getBattlefieldMessage() {
@@ -229,12 +234,23 @@ class Game {
         }
     }
 
+    getOverMessage() {
+        const winner = this.getWinner();
+        if (winner === "Player") {
+            return ["Players win!", "All enemies are dead :)"];
+        } else if (winner === "Castle") {
+            return ["Players lose...", "A player is dead :("];
+        } else {
+            return ["Game over", "The game is simply over without a winner..."];
+        }
+    }
+
     getWinner() {
         if (this.phase === Phase.OVER) {
             if (this.players.find(player => player.isDead())) {
                 // If any player is dead, the enemy wins
                 return "Castle";
-            } else {
+            } else if (this.enemies.length === 0) {
                 // If all players are alive, the players win
                 return "Player";
             }

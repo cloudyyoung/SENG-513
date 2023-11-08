@@ -33,6 +33,7 @@ Open `index.html` to start game play.
 
 
 # Copyright Information
-Assets resources and rules are credited to [**Pixel Playing Cards | 54 Cards + Card-back** on Itch.io](https://zxyonitch.itch.io/pixel-playing-cards-52-cards-card-back).
+Assets resources and rules are credited to [**Pixel Playing Cards | 54 Cards + Card-back** on Itch.io](https://zxyonitch.itch.io/pixel-playing-cards-52-cards-card-back) and [**Magical UI | UI Pixel Art Asset Pack by Gowl** on Itch.io](https://gowldev.itch.io/ui-paper) (Purchased assets).
+
 
 The asserts are CC0.

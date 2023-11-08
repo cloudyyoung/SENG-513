@@ -28,10 +28,16 @@ class Game {
         this.enemies = Enemy.initialize();
         this.discards = [];
         this.battlefield = [];
+
+        // Battlefield stats
         this.attacker = null;
+        this.battlefieldMultiplier = 1;
 
         // Set current player and enemy
         this.current_player_index = 0;
+
+        // Game phase
+        this.phase = Phase.STARTED;
 
         // Initialize tavern
         const tavern_ranks = [
@@ -92,28 +98,103 @@ class Game {
         this.battlefield = [];
     }
 
+    getBattlefieldCardValue() {
+        return Card.getTotalRank(this.battlefield);
+    }
+
     resolveBattlefield() {
-        // TODO: Implement this
-        // Resolve card effects
-        const total_rank = Card.totalRank(this.battlefield);
-        const current_enemy = this.getCurrentEnemy();
-        current_enemy.takeDamage(total_rank);
+        // Resolve card powers for player
+        // Don't resolve suit power for the same suit with the enemy
+        if (this.attacker instanceof Player) {
+            const currentEnemySuit = this.getCurrentEnemy().card.suit;
+
+            this.battlefield.forEach(card => {
+                if (card.suit !== currentEnemySuit) {
+                    const power = card.getPower();
+                    power(this);
+                }
+            });
+        }
+
+        // Resolve damage
+        const totalCardValue = this.getBattlefieldCardValue() * this.battlefieldMultiplier;
+
+        if (this.attacker instanceof Player) {
+            // When players attack, they deal total card value damage to the enemy
+            const currentEnemy = this.getCurrentEnemy();
+            currentEnemy.takeDamage(totalCardValue);
+        } else {
+            // When enemies attack, they deal enemy attack damage, but players defend with total card value
+            const currentPlayer = this.getCurrentPlayer();
+            currentPlayer.takeDamage(this.attacker.attack - totalCardValue);
+        }
+    }
+
+    switchAttacker(force_player = false) {
+        // `force_player` is used to force the attacker to be the player
+
+        // If the attacker is a player, switch to the enemy
+        // If the attacker is an enemy, switch to the next player
+        // If force_player is true, switch to the next player regardless of the attacker
+        if (this.attacker instanceof Player && !force_player) {
+            this.attacker = this.getCurrentEnemy();
+        } else {
+            const nextPlayer = this.nextPlayer();
+            this.attacker = nextPlayer;
+        }
     }
 
     concludeTurn() {
-        if (this.getCurrentEnemy().isDead()) {
-            this.discardCard(this.getCurrentEnemy().card);
-            this.nextEnemy();
-        }
-
         // Discard all battlefield cards
         this.battlefield.forEach(card => {
             this.discardCard(card);
         });
-
         this.clearBattlefield();
+        this.battlefieldMultiplier = 1;
 
-        this.nextPlayer();
+        // If enemy is dead, switch to the next enemy and next player attacks first
+        if (this.getCurrentEnemy().isDead()) {
+            // The enemy is dead, directly switch to the next enemy and the player attacks again
+            this.discardCard(this.getCurrentEnemy().card);
+            this.nextEnemy();
+            this.switchAttacker(true);
+        } else {
+            // Switch attacker as normal
+            this.switchAttacker();
+        }
+
+        // Make sure all players are still alive
+        this.players.forEach(player => {
+            if (player.isDead()) {
+                this.phase = Phase.OVER;
+            }
+        });
+    }
+
+    getBattlefieldMessage() {
+        const playerName = this.getCurrentPlayer().name;
+        const enemyName = this.getCurrentEnemy().name;
+        const battlefieldSize = this.battlefield.length;
+        const battlefieldCardValue = this.getBattlefieldCardValue();
+
+        if (this.attacker instanceof Player) {
+            return `"${playerName}" is attacking "${enemyName}" with ${battlefieldCardValue} attack value (${battlefieldSize} cards)`;
+        } else {
+            const attack_value = this.getCurrentEnemy().attack;
+            return `"${enemyName}" is attacking "${playerName}" with ${attack_value} damage, and "${playerName}" is defending with ${battlefieldCardValue} defend value (${battlefieldSize} cards)`;
+        }
+    }
+
+    getWinner() {
+        if (this.phase === Phase.OVER) {
+            if (this.players.find(player => player.isDead())) {
+                // If any player is dead, the enemy wins
+                return "Castle";
+            } else {
+                // If all players are alive, the players win
+                return "Player";
+            }
+        }
     }
 }
 
@@ -143,6 +224,8 @@ class Player extends Target {
     addCard(card) {
         if (this.isHandFull()) {
             throw new Error("Player hand is full");
+        } else if (card === undefined || card === null) {
+            return;
         }
 
         this.cards.push(card);
@@ -157,8 +240,8 @@ class Player extends Target {
     }
 
     static initialize(player_count) {
-        const { max_hand } = PlayerConfigurations[player_count];
-        return Array(player_count).fill().map((_, i) => new Player(`Player ${i + 1}`, `p${i + 1}`, max_hand));
+        const { max_cards } = PlayerConfigurations[player_count];
+        return Array(player_count).fill().map((_, i) => new Player(`Player ${i + 1}`, `p${i + 1}`, max_cards));
     }
 }
 
@@ -215,12 +298,10 @@ class Card {
     }
 
     getPower() {
-        // TODO: Implement this
-        // This function should return the power of the card
-        // based on the suit of the card
+        return SuitPower[this.suit];
     }
 
-    static totalRank(cards) {
+    static getTotalRank(cards) {
         const total_rank = cards.reduce((acc, card) => acc + card.rank, 0);
         return total_rank;
     }
@@ -231,6 +312,74 @@ const Suit = {
     SPADES: "spade",
     CLUBS: "club",
     DIAMONDS: "diamond",
+}
+
+const SuitPower = {
+    "heart": (game) => {
+        // Heal from the discard: Shuffle the discard pile then 
+        // count out a number of cards facedown equal to the
+        // attack value played. Place them under the Tavern
+        // deck(no peeking!) then, return the discard pile to
+        // the table, faceup.
+        const battlefieldCardValue = game.getBattlefieldCardValue();
+        const discardCardsNumber = battlefieldCardValue;
+
+        // Shuffle the discard pile, and put them at the top of the tavern
+        game.discards.shuffle();
+        game.tavern.unshift(...game.discards.splice(0, discardCardsNumber));
+    },
+    "diamond": (game) => {
+        // Draw cards: The current player draws a card. The 
+        // other players follow in clockwise order drawing one
+        // card at a time until a number of cards equal to the
+        // attack value played have been drawn.Players that
+        // have reached their maximum hand size are skipped.
+        // Players may never draw cards over their maximum
+        // hand size.There is no penalty for failing to draw
+        // cards from an empty Tavern deck.
+        const drawCardsNumber = game.getBattlefieldCardValue();
+        const drawDeck = game.tavern.slice(0, drawCardsNumber);
+
+        console.log(drawDeck);
+
+        while (drawDeck.length > 0) {
+            console.log(drawDeck);
+
+            game.players.forEach(player => {
+                if (player.isHandFull()) {
+                    return; // Skip if the player's hand is full
+                }
+
+                const card = drawDeck.shift();
+                player.addCard(card);
+            });
+
+            const allPlayerMaximumHandSize = game.players.every(player => player.isHandFull());
+            if (allPlayerMaximumHandSize) {
+                break; // Stop the process if everyone has maximum hand size
+            }
+        }
+
+        // Put unused cards back to the tavern
+        game.tavern.unshift(...drawDeck);
+    },
+    "club": (game) => {
+        // Double damage: During Step 3, damage dealt by 
+        // clubs counts for double.E.g., The 8 of Clubs deals 16
+        // damage.
+        game.battlefieldMultiplier = 2;
+    },
+    "spade": (game) => {
+        // Shield against enemy attack: During Step 4, reduce 
+        // the attack value of the current enemy by the attack
+        // value played.The shield effects of spades are
+        // cumulative for all spades played against this enemy
+        // by any player, and remain in effect until the enemy
+        // is defeated.
+        const battlefieldCardValue = game.getBattlefieldCardValue();
+        const currentEnemy = game.getCurrentEnemy();
+        currentEnemy.attack -= battlefieldCardValue;
+    }
 }
 
 const Rank = {
@@ -259,4 +408,9 @@ const PlayerConfigurations = {
     2: { jesters: 0, max_cards: 7 },
     3: { jesters: 1, max_cards: 6 },
     4: { jesters: 2, max_cards: 5 },
+}
+
+const Phase = {
+    STARTED: "started",
+    OVER: "over",
 }

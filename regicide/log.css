@@ -20,7 +20,7 @@
   z-index: 30;
   height: var(--log-loglay-bg-height);
   width: var(--log-loglay-bg-width);
-  padding: 9rem 4.4rem;
+  padding: 9rem 4rem 9rem 3.4rem;
   color: black;
   display: flex;
   flex-direction: column;

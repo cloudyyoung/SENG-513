@@ -214,6 +214,7 @@ function refreshYieldButton() {
         app.getGame().yieldBattlefield();
         app.getGame().concludeTurn();
         refreshBattlefield();
+        refreshPlayers();
         showTurnMessage();
     });
 }
@@ -240,7 +241,7 @@ function showOverMessage() {
 function showGameLogs() {
     document.querySelector(".logs-overlay").classList.remove("hide");
     document.querySelector(".logs-overlay .logs").innerHTML = app.getGame().logs.map(log => {
-        return `<div class="log">${log}.</div>`;
+        return `<li class="log">${log}.</li>`;
     }).join("");
 
     // Delete existing confirm button

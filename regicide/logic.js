@@ -112,6 +112,14 @@ class Game {
 
     yieldBattlefield() {
         this.yieldCount += 1;
+        // If battlefield has cards, return back to current player's hand
+        if (this.battlefield.length > 0) {
+            this.battlefield.forEach(card => {
+                this.getCurrentPlayer().addCard(card);
+            });
+            this.clearBattlefield();
+        }
+
         // If all players have yielded in the same round, game over
         if (this.yield === this.players.length) {
             this.phase = Phase.OVER;
@@ -469,7 +477,7 @@ const SuitPower = {
             const previous = playersCardsNumberPrevious[i];
             const current = player.cards.length;
             const diff = current - previous;
-            game.logs.push(`Player "${player.name}" now has ${current} cards in hand (${diff} cards drawn, maximum ${player.maxCards} cards in hand)`);
+            game.logs.push(`→ Player "${player.name}" now has ${current} cards in hand (${diff} cards drawn, maximum ${player.maxCards} cards in hand)`);
         });
 
 

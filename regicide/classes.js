@@ -94,6 +94,10 @@ class Game {
         this.battlefield.push(card);
     }
 
+    removeBattlefieldCard(card) {
+        this.battlefield = this.battlefield.filter(c => c !== card);
+    }
+
     clearBattlefield() {
         this.battlefield = [];
     }
@@ -182,6 +186,17 @@ class Game {
         } else {
             const attack_value = this.getCurrentEnemy().attack;
             return `"${enemyName}" is attacking "${playerName}" with ${attack_value} damage, and "${playerName}" is defending with ${battlefieldCardValue} defend value (${battlefieldSize} cards)`;
+        }
+    }
+
+    getTurnMessage() {
+        const playerName = this.getCurrentPlayer().name;
+        const enemyName = this.getCurrentEnemy().name;
+
+        if (this.attacker instanceof Player) {
+            return `${playerName}'s Turn`;
+        } else {
+            return `${enemyName}'s Turn`;
         }
     }
 

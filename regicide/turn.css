@@ -1,0 +1,34 @@
+:root {
+  --turn-overlay-bg-original-width: 236px;
+  --turn-overlay-bg-original-height: 125px;
+  --turn-overlay-bg-size-ratio: 1.2;
+  --turn-overlay-bg-width: calc(var(--turn-overlay-bg-original-width) * var(--turn-overlay-bg-size-ratio));
+  --turn-overlay-bg-height: calc(var(--turn-overlay-bg-original-height) * var(--turn-overlay-bg-size-ratio));
+}
+
+.overlay.turn-overlay {
+  align-items: start;
+  padding-top: 5rem;
+}
+
+.turn-wrapper {
+  background-image: url("assets/DialogPaper.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 30;
+  height: var(--turn-overlay-bg-height);
+  width: var(--turn-overlay-bg-width);
+  padding: 2rem 1.8rem 2.66rem 2.4rem;
+  color: black;
+}
+
+.turn-wrapper .title {
+  font-size: 1.4rem;
+  margin-bottom: 0.2rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}

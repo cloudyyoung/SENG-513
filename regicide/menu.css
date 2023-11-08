@@ -7,7 +7,7 @@
   --menu-bg-slice-height: calc(var(--menu-bg-slice-original-height) * var(--menu-bg-slice-size-ratio));
 }
 
-.overlay.menu-overlay {
+.overlay.menu-overlay::after {
   background-image: url("assets/Epgsl7.gif");
 }
 

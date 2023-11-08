@@ -84,7 +84,8 @@
   background-image: url('assets/label/Header5.png');
   background-position: center;
   background-repeat: no-repeat;
-  padding: 0.6rem 0rem 1.4rem;
+  background-size: contain;
+  padding: 0.7rem 0rem 1.5rem;
   z-index: 20;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.2, 0.0, 0, 1.0);
@@ -92,6 +93,22 @@
 
 .current-player .label:hover {
   transform: scale(1.1);
+}
+
+.current-player .label[data-identifier="p1"] {
+  background-image: url('assets/label/Header3.png');
+}
+
+.current-player .label[data-identifier="p2"] {
+  background-image: url('assets/label/Header4.png');
+}
+
+.current-player .label[data-identifier="p3"] {
+  background-image: url('assets/label/Header5.png');
+}
+
+.current-player .label[data-identifier="p4"] {
+  background-image: url('assets/label/Header6.png');
 }
 
 @media (max-width: 960px) {

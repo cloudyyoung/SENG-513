@@ -72,11 +72,6 @@ function refreshEnvironment() {
     document.querySelector(".tavern").replaceChildren(...app.getGame().tavern.map(card => {
         const card_element = document.createElement("div");
         refreshCard(card, card_element);
-        card_element.addEventListener("click", () => {
-            app.getGame().getCurrentPlayer().addCard(app.getGame().drawTavernCard())
-            refreshPlayers();
-            refreshEnvironment();
-        });
         return card_element;
     }).reverse());
 
@@ -111,6 +106,7 @@ function refreshPlayers() {
         return card_element;
     });
     document.querySelector(`.current-player .hand`).replaceChildren(...card_elements);
+    document.querySelector(`.current-player .label`).setAttribute("data-identifier", current_player.identifier);
     document.querySelector(`.current-player .label`).innerHTML = current_player.name;
 
     // Display other players and their cards
@@ -129,6 +125,12 @@ function refreshBattlefield() {
     document.querySelector(".battlefield").replaceChildren(...app.getGame().battlefield.map(card => {
         const card_element = document.createElement("div");
         refreshCard(card, card_element);
+        card_element.addEventListener("click", () => {
+            app.getGame().removeBattlefieldCard(card);
+            app.getGame().getCurrentPlayer().addCard(card);
+            refreshBattlefield();
+            refreshPlayers();
+        });
         return card_element;
     }));
     refreshResolveButton();
@@ -153,6 +155,7 @@ function refreshResolveButton() {
         refreshEnvironment();
         refreshBattlefield();
         refreshPlayers();
+        showTurnMessage();
     });
 
     // Show resolve button if there are cards on the battlefield
@@ -162,6 +165,14 @@ function refreshResolveButton() {
     } else {
         resolve_button.classList.add("hide");
     }
+}
+
+function showTurnMessage() {
+    document.querySelector(".turn-overlay").classList.remove("hide");
+    document.querySelector(".turn-overlay .title").innerHTML = app.getGame().getTurnMessage();
+    setTimeout(() => {
+        document.querySelector(".turn-overlay").classList.add("hide");
+    }, 1500);
 }
 
 window.addEventListener('resize', function () {
@@ -184,6 +195,7 @@ document.querySelector(".menu .start").addEventListener("click", (e) => {
     refreshEnvironment();
     refreshBattlefield();
     refreshPlayers();
+    showTurnMessage();
 })
 
 document.querySelectorAll(".menu .players-options .option").forEach(a => a.addEventListener("click", () => {

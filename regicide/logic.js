@@ -41,6 +41,9 @@ class Game {
         // Game phase
         this.phase = Phase.STARTED;
 
+        // Turn Logs
+        this.logs = [];
+
         // Initialize tavern
         const tavernRanks = [
             Rank.ACE, Rank.TWO, Rank.THREE, Rank.FOUR, Rank.FIVE,
@@ -127,6 +130,8 @@ class Game {
         // Resolve card powers for player
         // Don't resolve suit power for the same suit with the enemy
         if (this.attacker instanceof Player) {
+            this.logs.push(`Player "${this.attacker.name}" is attacking "${this.getCurrentEnemy().name}" with ${this.getBattlefieldAttackValue()} damage`);
+
             const currentEnemySuit = this.getCurrentEnemy().card.suit;
 
             this.battlefield.forEach(card => {
@@ -135,6 +140,8 @@ class Game {
                     power(this, card);
                 }
             });
+        } else {
+            this.logs.push(`Enemy "${this.attacker.name}" is attacking "${this.getCurrentPlayer().name} with ${this.getCurrentEnemy().attack} damage`);
         }
 
         // Resolve damage
@@ -143,11 +150,16 @@ class Game {
             const totalAttackValue = this.getBattlefieldAttackValue();
             const currentEnemy = this.getCurrentEnemy();
             currentEnemy.takeDamage(totalAttackValue);
+            this.logs.push(`Enemy "${currentEnemy.name}" takes ${totalAttackValue} damage, and has ${currentEnemy.health} health left`);
         } else {
             // When enemies attack, they deal enemy attack damage, but players defend with total card value
             const totalDefendValue = this.getBattlefieldDefendValue();
             const currentPlayer = this.getCurrentPlayer();
-            currentPlayer.takeDamage(this.attacker.attack - totalDefendValue);
+            const attack = this.getCurrentEnemy().attack;
+            const damage = Math.max(0, this.attacker.attack - totalDefendValue);
+            currentPlayer.takeDamage(damage);
+            this.logs.push(`Player "${currentPlayer.name}" attempts ${totalDefendValue} defence to ${attack} damage`);
+            this.logs.push(`Player "${currentPlayer.name}" takes ${damage} damage`);
         }
     }
 
@@ -188,7 +200,9 @@ class Game {
         if (this.getCurrentEnemy().isDead()) {
             // The enemy is dead, directly switch to the next enemy and the player attacks again
             this.discardCard(this.getCurrentEnemy().card);
+            this.logs.push(`Enemy "${this.getCurrentEnemy().name}" is dead`);
             this.nextEnemy();
+            this.logs.push(`Next enemy is "${this.getCurrentEnemy().name}"`);
             this.switchAttacker(true);
         } else {
             // Switch attacker as normal
@@ -198,19 +212,25 @@ class Game {
         // Make sure all players are still alive
         this.players.forEach(player => {
             if (player.isDead()) {
+                this.logs.push(`"${player.name}" is dead`);
                 this.phase = Phase.OVER;
             }
         });
 
         // Make sure there are still enemies
         if (this.enemies.length === 0) {
+            this.logs.push("All enemies are dead");
             this.phase = Phase.OVER;
         }
 
         // Make sure the next up player has card in hand to play
         if (this.getCurrentPlayer().isHandEmpty()) {
+            this.logs.push(`"${this.getCurrentPlayer().name}" has no cards to play`);
             this.phase = Phase.OVER;
         }
+
+        console.log(this.logs);
+        this.logs = [];
     }
 
     getBattlefieldMessage() {
@@ -263,6 +283,7 @@ class Target {
     }
 
     takeDamage(damage) {
+        damage = Math.max(0, damage);
         this.health = Math.max(0, this.health - damage);
     }
 
@@ -400,6 +421,8 @@ const SuitPower = {
         // Shuffle the discard pile, and put them at the top of the tavern
         game.discards.shuffle();
         game.tavern.unshift(...game.discards.splice(0, discardCardsNumber));
+
+        game.logs.push(`Card "${card.name}" shuffles ${discardCardsNumber} cards from discard pile to the tavern`);
     },
     "diamond": (game, card) => {
         // Draw cards: The current player draws a card. The 
@@ -414,6 +437,7 @@ const SuitPower = {
         const drawDeck = game.tavern.slice(0, drawCardsNumber);
         let cardsDrawn = 0;
         let currentPlayerIndex = game.currentPlayerIndex;
+        let playersCardsNumberPrevious = game.players.map(player => player.cards.length);
 
         while (cardsDrawn < drawCardsNumber && drawDeck.length > 0) {
             let player = game.players[currentPlayerIndex];
@@ -437,14 +461,24 @@ const SuitPower = {
             }
         }
 
+        game.logs.push(`Card "${card.name}" should hand ${drawCardsNumber} cards out from tavern and hand to players, and it eventually hands ${cardsDrawn} cards out from tavern to players`);
+        game.players.forEach((player, i) => {
+            const previous = playersCardsNumberPrevious[i];
+            const current = player.cards.length;
+            const diff = current - previous;
+            game.logs.push(`Player "${player.name}" now has ${current} cards in hand (${diff} cards drawn, maximum ${player.maxCards} cards in hand)`);
+        });
+
+
         // Update the game's tavern deck by removing the drawn cards
         game.tavern.splice(0, cardsDrawn);
     },
-    "club": (_, card) => {
+    "club": (game, card) => {
         // Double damage: During Step 3, damage dealt by 
         // clubs counts for double.E.g., The 8 of Clubs deals 16
         // damage.
         card.attack = card.defend * 2;
+        game.logs.push(`Card "${card.name}" is doubled to ${card.attack} damage`);
     },
     "spade": (game, card) => {
         // Shield against enemy attack: During Step 4, reduce 
@@ -456,6 +490,7 @@ const SuitPower = {
         const battlefieldCardValue = card.attack;
         const currentEnemy = game.getCurrentEnemy();
         currentEnemy.takeDefend(battlefieldCardValue);
+        game.logs.push(`Card "${card.name}" make current enemy "${currentEnemy.name}" loses ${battlefieldCardValue} attack, and has ${currentEnemy.attack} attack left`);
     }
 }
 

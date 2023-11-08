@@ -110,6 +110,7 @@ function refreshPlayers() {
     document.querySelector(`.current-player .label`).innerHTML = current_player.name;
 
     // Display other players and their cards
+    document.querySelector(".max-cards").innerHTML = `Max ${app.getGame().players[0].max_cards} cards per player`;
     document.querySelector(`.players`).replaceChildren(...app.getGame().players.map((player, player_index) => {
         const player_element = document.createElement("div");
         player_element.classList.add("player", player.identifier);
@@ -148,7 +149,7 @@ function refreshResolveButton() {
     const resolve_button = document.createElement("button");
     resolve_button.classList.add("resolve");
     resolve_button.innerHTML = "Resolve";
-    document.querySelector(".battle").appendChild(resolve_button);
+    document.querySelector(".battle .buttons").appendChild(resolve_button);
     resolve_button.addEventListener("click", () => {
         app.getGame().resolveBattlefield();
         app.getGame().concludeTurn();

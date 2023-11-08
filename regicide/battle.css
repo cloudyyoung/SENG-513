@@ -21,11 +21,26 @@
   margin: 0.6rem;
 }
 
-.battle .resolve {
+.battle .buttons {
   position: absolute;
-  right: 0;
-  bottom: 0;
-  padding: 0.6rem;
+  bottom: 0rem;
+  left: 0rem;
+  right: 0rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.battle .resolve {
+  padding: 0.6rem 1rem;
+  background-color: #903B2F;
+  border: #5B2934 0.36rem solid;
+  border-radius: 1rem;
+}
+
+.battle .resolve:hover {
+  background-color: #B44E3A;
 }
 
 .battle .resolve.hide {
@@ -150,10 +165,18 @@
   .battle {
     padding-top: 3rem;
   }
+
+  .battle .description {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 640px) {
   .battle {
     padding-top: 2.4rem;
+  }
+
+  .battle .description {
+    font-size: 0.8rem;
   }
 }

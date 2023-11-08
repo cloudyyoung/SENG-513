@@ -36,3 +36,7 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+.players-wrapper .max-cards {
+  opacity: 0.5;
+}

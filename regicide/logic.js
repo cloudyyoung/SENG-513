@@ -258,7 +258,7 @@ class Game {
         } else {
             const attackValue = this.getCurrentEnemy().attack;
             const battlefieldDefendValue = this.getBattlefieldDefendValue();
-            return `"${enemyName}" is attacking "${playerName}" with ${attackValue} damage, and "${playerName}" is defending with ${battlefieldDefendValue} defend value (${battlefieldSize} cards)`;
+            return `"${enemyName}" is attacking "${playerName}" with ${attackValue} attack value, and "${playerName}" is defending with ${battlefieldDefendValue} defend value (${battlefieldSize} cards)`;
         }
     }
 
@@ -435,6 +435,7 @@ const SuitPower = {
         // Shuffle the discard pile, and put them at the top of the tavern
         game.discards.shuffle();
         game.tavern.unshift(...game.discards.splice(0, discardCardsNumber));
+        game.tavern.forEach(card => card.hide());
 
         game.logs.push(`Card "${card.name}" shuffles ${discardCardsNumber} cards from discard pile to the tavern`);
     },

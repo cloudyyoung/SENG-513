@@ -20,6 +20,12 @@
   position: relative;
   width: var(--current-player-width);
   margin: 0 auto;
+  transition: all 0.5s ease-in-out;
+}
+
+.current-player.hide {
+  margin-top: 100%;
+  opacity: 0;
 }
 
 .current-player .border {

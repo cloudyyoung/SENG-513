@@ -95,25 +95,37 @@ function refreshEnvironment() {
 // It should show the current player
 // It should show the glance card view other players
 function refreshPlayers() {
-    // Display current player and their cards
+    // Get current player attribute
+    const currentPlayerHand = document.querySelector(".current-player .label").getAttribute("data-identifier");
     const currentPlayer = app.getGame().getCurrentPlayer();
-    const cardElements = currentPlayer.cards.map(card => {
-        card.reveal();
+    const isSwitchedPlayer = currentPlayer.identifier !== currentPlayerHand;
 
-        const cardElement = document.createElement("div");
-        refreshCard(card, cardElement);
-        cardElement.addEventListener("click", () => {
+    // Show current player switch animation
+    setTimeout(() => {
+        document.querySelector(".current-player").classList.add("hide");
+    }, isSwitchedPlayer ? 400 : 0);
+    setTimeout(() => {
+        document.querySelector(".current-player").classList.remove("hide");
+
+        // Display current player and their cards
+        const cardElements = currentPlayer.cards.map(card => {
             card.reveal();
-            app.getGame().addBattlefieldCard(card);
-            currentPlayer.dropCard(card);
-            refreshBattlefield();
-            refreshPlayers();
+
+            const cardElement = document.createElement("div");
+            refreshCard(card, cardElement);
+            cardElement.addEventListener("click", () => {
+                card.reveal();
+                app.getGame().addBattlefieldCard(card);
+                currentPlayer.dropCard(card);
+                refreshBattlefield();
+                refreshPlayers();
+            });
+            return cardElement;
         });
-        return cardElement;
-    });
-    document.querySelector(`.current-player .hand`).replaceChildren(...cardElements);
-    document.querySelector(`.current-player .label`).setAttribute("data-identifier", currentPlayer.identifier);
-    document.querySelector(`.current-player .label`).innerHTML = currentPlayer.name;
+        document.querySelector(`.current-player .hand`).replaceChildren(...cardElements);
+        document.querySelector(`.current-player .label`).setAttribute("data-identifier", currentPlayer.identifier);
+        document.querySelector(`.current-player .label`).innerHTML = currentPlayer.name;
+    }, isSwitchedPlayer ? 900 : 1);
 
     // Display other players and their cards
     document.querySelector(".max-cards").innerHTML = `Max ${app.getGame().players[0].maxCards} cards per player`;

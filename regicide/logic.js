@@ -53,7 +53,8 @@ class Game {
         this.tavern = tavernRanks.flatMap(rank => {
             return tavernSuits.flatMap(suit => {
                 const name = `${suit} ${rank}`;
-                const card = new Card(name, suit, rank, rank);
+                const suitName = suit.charAt(0).toUpperCase() + suit.slice(1);
+                const card = new Card(suitName, suit, rank, rank);
                 return card;
             }).shuffle();
         }).shuffle();
@@ -146,6 +147,8 @@ class Game {
                 if (card.suit !== currentEnemySuit) {
                     const power = card.getPower();
                     power(this, card);
+                } else {
+                    this.logs.push(`Card "${card.name}" has the same suit with the enemy "${this.getCurrentEnemy().name}", so its power is not resolved`);
                 }
             });
         } else {

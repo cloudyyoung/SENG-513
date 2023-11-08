@@ -206,6 +206,11 @@ class Game {
         if (this.enemies.length === 0) {
             this.phase = Phase.OVER;
         }
+
+        // Make sure the next up player has card in hand to play
+        if (this.getCurrentPlayer().isHandEmpty()) {
+            this.phase = Phase.OVER;
+        }
     }
 
     getBattlefieldMessage() {
@@ -235,25 +240,18 @@ class Game {
     }
 
     getOverMessage() {
-        const winner = this.getWinner();
-        if (winner === "Player") {
-            return ["Players win!", "All enemies are dead :)"];
-        } else if (winner === "Castle") {
+        if (this.phase !== Phase.OVER) {
+            return;
+        } else if (this.players.find(player => player.isDead())) {
             return ["Players lose...", "A player is dead :("];
+        } else if (this.enemies.length === 0) {
+            return ["Players win!", "All enemies are dead :P"];
+        } else if (this.yieldCount === this.players.length) {
+            return ["Players lose...", "All players have yielded in this turn :("];
+        } else if (this.getCurrentPlayer().isHandEmpty()) {
+            return ["Players lose...", `Current player "${this.getCurrentPlayer().name}" has no cards to play :(`];
         } else {
             return ["Game over", "The game is simply over without a winner..."];
-        }
-    }
-
-    getWinner() {
-        if (this.phase === Phase.OVER) {
-            if (this.players.find(player => player.isDead())) {
-                // If any player is dead, the enemy wins
-                return "Castle";
-            } else if (this.enemies.length === 0) {
-                // If all players are alive, the players win
-                return "Player";
-            }
         }
     }
 }
@@ -297,6 +295,10 @@ class Player extends Target {
 
     isHandFull() {
         return this.cards.length >= this.maxCards;
+    }
+
+    isHandEmpty() {
+        return this.cards.length === 0;
     }
 
     static initialize(playerCount) {

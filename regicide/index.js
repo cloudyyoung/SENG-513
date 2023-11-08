@@ -135,6 +135,7 @@ function refreshBattlefield() {
         return card_element;
     }));
     refreshResolveButton();
+    refreshYieldButton();
     document.querySelector(".battle .description").innerHTML = app.getGame().getBattlefieldMessage();
 }
 
@@ -166,6 +167,33 @@ function refreshResolveButton() {
     } else {
         resolve_button.classList.add("hide");
     }
+}
+
+function refreshYieldButton() {
+    // Remove existing yield button
+    const existing_yield_button = document.querySelector(".battle .yield");
+    if (existing_yield_button) {
+        existing_yield_button.remove();
+    }
+
+    // If the current turn is not player's turn, do not show yield button
+    if (app.getGame().getAttackerType() !== "Player") {
+        return;
+    }
+
+    // Create yield button
+    const yield_button = document.createElement("button");
+    yield_button.classList.add("yield");
+    yield_button.innerHTML = "Yield";
+    document.querySelector(".battle .buttons").appendChild(yield_button);
+    yield_button.addEventListener("click", () => {
+        app.getGame().yieldBattlefield();
+        app.getGame().concludeTurn();
+        refreshBattlefield();
+        showTurnMessage();
+
+        console.log(app.getGame().phase);
+    });
 }
 
 function showTurnMessage() {

@@ -33,6 +33,9 @@ class Game {
         this.attacker = null;
         this.battlefieldMultiplier = 1;
 
+        // Yield count
+        this.yield_count = 0;
+
         // Set current player and enemy
         this.current_player_index = 0;
 
@@ -67,6 +70,9 @@ class Game {
 
     nextPlayer() {
         this.current_player_index = (this.current_player_index + 1) % this.players.length;
+        if (this.current_player_index === 0) {
+            this.yield_count = 0;
+        }
         return this.getCurrentPlayer();
     }
 
@@ -102,6 +108,14 @@ class Game {
         this.battlefield = [];
     }
 
+    yieldBattlefield() {
+        this.yield_count += 1;
+        // If all players have yielded in the same round, game over
+        if (this.yield === this.players.length) {
+            this.phase = Phase.OVER;
+        }
+    }
+
     getBattlefieldCardValue() {
         return Card.getTotalRank(this.battlefield);
     }
@@ -131,6 +145,18 @@ class Game {
             // When enemies attack, they deal enemy attack damage, but players defend with total card value
             const currentPlayer = this.getCurrentPlayer();
             currentPlayer.takeDamage(this.attacker.attack - totalCardValue);
+        }
+    }
+
+    getAttacker() {
+        return this.attacker;
+    }
+
+    getAttackerType() {
+        if (this.attacker instanceof Player) {
+            return "Player";
+        } else {
+            return "Enemy";
         }
     }
 

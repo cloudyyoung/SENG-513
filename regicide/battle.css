@@ -32,18 +32,19 @@
   gap: 1rem;
 }
 
-.battle .resolve {
-  padding: 0.6rem 1rem;
+.battle button {
+  padding: 0.5rem 0.8rem;
   background-color: #903B2F;
-  border: #5B2934 0.36rem solid;
+  border: #5B2934 0.32rem solid;
   border-radius: 1rem;
+  font-size: 1.1rem;
 }
 
-.battle .resolve:hover {
+.battle button:hover {
   background-color: #B44E3A;
 }
 
-.battle .resolve.hide {
+.battle button.hide {
   display: none;
 }
 

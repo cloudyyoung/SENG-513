@@ -176,6 +176,10 @@
   .battle .description {
     font-size: 1rem;
   }
+
+  .battle button {
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 640px) {
@@ -185,5 +189,9 @@
 
   .battle .description {
     font-size: 0.8rem;
+  }
+
+  .battle button {
+    font-size: 0.7rem;
   }
 }

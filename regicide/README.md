@@ -28,6 +28,26 @@ Coop Card Game (Board game).
 
 More detailed gameplay information could be found in the official Regicide rule book [here](https://www.regicidegame.com/site_files/33132/upload_files/RegicideRulesA4.pdf).
 
+Please notice that the game is not implemented with **every feature** listed in the rulebook. 
+The following features (referring to the rulebook) are implemented:
+1. Setup
+2. How to Play (include all suit powers)
+3. Enemy Immunity
+4. Yielding
+5. Drawing a Defeated Enemy
+6. Game End
+
+And the following features are **not** implemented:
+1. Animal Companions
+2. Combos
+3. Playing the Jester
+4. Solo Play
+
+As well as the following features mentioned in the rulebook by pieces:
+1. Everything about Jesters
+2. When a player attacks an emeny with a damage that is exactly the same as the enemy's health, the rulebook stated that the enemy card should go to the tavern pile instead of discard pile. This is not implemented.
+
+
 # How to run the game
 Open `index.html` to start game play.
 

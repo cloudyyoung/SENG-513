@@ -1,7 +1,7 @@
 /**
  * Course: SENG 513
- * Date: OCT 11, 2023
- * Assignment 2
+ * Date: NOV 12, 2023
+ * Assignment 3
  * Name: Yunfan Yang
  * UCID: 30067857
  */

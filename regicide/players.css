@@ -39,4 +39,6 @@
 
 .players-wrapper .max-cards {
   opacity: 0.5;
+  text-align: center;
+  margin-top: 0.6rem;
 }

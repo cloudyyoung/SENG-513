@@ -1,0 +1,126 @@
+/* Course: SENG 513 */
+/* Date: NOV 12, 2023 */
+/* Assignment 3 */
+/* Name: Yunfan Yang */
+/* UCID: 30067857 */
+
+:root {
+  --castle-bg-slice-original-width: 277px;
+  --castle-bg-slice-original-height: 114px;
+  --castle-bg-slice-size-ratio: 0.666;
+  --castle-bg-slice-width: calc(var(--castle-bg-slice-original-width) * var(--castle-bg-slice-size-ratio));
+  --castle-bg-slice-height: calc(var(--castle-bg-slice-original-height) * var(--castle-bg-slice-size-ratio));
+}
+
+.castle-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  justify-content: center;
+  justify-items: center;
+  padding: 4rem 2rem 3em;
+  margin: 0rem -2rem;
+  position: relative;
+  z-index: 9;
+}
+
+.castle-wrapper .castle {
+  height: calc(var(--card-height) * 1.2);
+  width: calc(var(--card-width) * 1.2);
+}
+
+.castle-wrapper .castle .card {
+  height: calc(var(--card-height) * 1.2);
+  width: calc(var(--card-width) * 1.2);
+  margin-bottom: calc(var(--card-height) * -1.2);
+}
+
+.castle-wrapper .values {
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-items: center;
+  gap: 0.8rem;
+  color: #b80000;
+  /* text-shadow: 0px 0px 4px #fff, 0px 0px 8px #fff, 0px 0px 16px #fff, 0px 0px 20px #fff, 0px 0px 28px #fff, 0px 0px 32px #b80000; */
+}
+
+.castle-wrapper .values .value {
+  display: flex;
+  flex-direction: column;
+}
+
+.castle-wrapper .values .value .digit {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.castle-wrapper .border {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+
+.castle-wrapper .border.top {
+  top: 0;
+  left: 0;
+  width: var(--castle-bg-slice-width);
+  height: var(--castle-bg-slice-height);
+  background-image: url('assets/castle/00.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
+.castle-wrapper .border.bottom {
+  bottom: 0;
+  left: 0;
+  width: var(--castle-bg-slice-width);
+  height: var(--castle-bg-slice-height);
+  background-image: url('assets/castle/02.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+}
+
+.castle-wrapper .border.middle {
+  top: var(--castle-bg-slice-height);
+  left: 0;
+  width: var(--castle-bg-slice-width);
+  height: calc(100% - (var(--castle-bg-slice-height) * 2));
+  background-image: url('assets/castle/01.png');
+  background-size: 100% 100%;
+  background-repeat: repeat-y;
+  background-position: center center;
+}
+
+@media (max-width: 960px) {
+  :root {
+    --castle-bg-slice-size-ratio: 0.552;
+  }
+  
+  .castle-wrapper {
+    padding: 3rem 1.6rem 2.6em;
+  }
+
+  .castle-wrapper .values{
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --castle-bg-slice-size-ratio: 0.46;
+  }
+  
+  .castle-wrapper {
+    padding: 2.5rem 1.4rem 2.3em;
+  }
+
+  .castle-wrapper .values{
+    font-size: 0.7rem;
+  }
+}

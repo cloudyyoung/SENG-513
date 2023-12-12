@@ -1,0 +1,140 @@
+/* Course: SENG 513 */
+/* Date: NOV 12, 2023 */
+/* Assignment 3 */
+/* Name: Yunfan Yang */
+/* UCID: 30067857 */
+
+:root {
+  --current-player-bg-slice-original-width: 133px;
+  --current-player-bg-slice-original-height: 141px;
+  --current-player-bg-slice-size-ratio: 1.2;
+  --current-player-bg-slice-width: calc(var(--current-player-bg-slice-original-width) * var(--current-player-bg-slice-size-ratio));
+  --current-player-bg-slice-height: calc(var(--current-player-bg-slice-original-height) * var(--current-player-bg-slice-size-ratio));
+
+  --current-player-width: calc(var(--card-width) * 8.4);
+
+  --current-player-hand-card-offset: calc(var(--card-width) * 0.1);
+}
+
+.current-player {
+  position: relative;
+  width: var(--current-player-width);
+  margin: 0 auto;
+  transition: all 0.5s ease-in-out;
+}
+
+.current-player.hide {
+  margin-top: 100%;
+  opacity: 0;
+}
+
+.current-player .border {
+  background-size: contain;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.current-player .border.left, 
+.current-player .border.right,
+.current-player .border.middle {
+  position: absolute;
+}
+
+.current-player .border.left {
+  width: var(--current-player-bg-slice-width);
+  height: var(--current-player-bg-slice-height);
+  background-image: url('assets/hand/00.png');
+  background-position: bottom left;
+  background-repeat: no-repeat;
+  top: 0;
+  left: 0;
+}
+
+.current-player .border.right {
+  width: var(--current-player-bg-slice-width);
+  height: var(--current-player-bg-slice-height);
+  background-image: url('assets/hand/20.png');
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  top: 0;
+  right: 0;
+}
+
+.current-player .border.middle {
+  left: calc(var(--current-player-bg-slice-width) - 1px);
+  width: calc(100% - (var(--current-player-bg-slice-width) * 2) + 2px);
+  height: var(--current-player-bg-slice-height);
+  background-size: 100% cover;
+  background-repeat: repeat-x;
+  background-image: url('assets/hand/10.png');
+  background-position: bottom center;
+  top: 0;
+}
+
+.current-player {
+  margin-bottom: 2rem;
+}
+
+.current-player .hand {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  justify-content: center;
+  min-height: var(--card-height);
+}
+
+.current-player .hand .card {
+  margin-left: calc(-1 * var(--current-player-hand-card-offset));
+  margin-right: calc(-1 * var(--current-player-hand-card-offset));
+}
+
+.current-player .label {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  text-align: center;
+  background-image: url('assets/label/Header5.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 0.7rem 0rem 1.5rem;
+  z-index: 20;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.2, 0.0, 0, 1.0);
+}
+
+.current-player .label:hover {
+  transform: scale(1.1);
+}
+
+.current-player .label[data-identifier="p1"] {
+  background-image: url('assets/label/Header3.png');
+}
+
+.current-player .label[data-identifier="p2"] {
+  background-image: url('assets/label/Header4.png');
+}
+
+.current-player .label[data-identifier="p3"] {
+  background-image: url('assets/label/Header5.png');
+}
+
+.current-player .label[data-identifier="p4"] {
+  background-image: url('assets/label/Header6.png');
+}
+
+@media (max-width: 960px) {
+  :root {
+    --current-player-bg-slice-size-ratio: 1;
+    --current-player-width: calc(var(--card-width) * 7);
+    --current-player-hand-card-offset: calc(var(--card-width) * 0.2);
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --current-player-bg-slice-size-ratio: 0.82;
+    --current-player-width: calc(var(--card-width) * 4.7);
+    --current-player-hand-card-offset: calc(var(--card-width) * 0.36);
+  }
+}

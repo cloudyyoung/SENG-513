@@ -1,0 +1,35 @@
+/* Course: SENG 513 */
+/* Date: NOV 12, 2023 */
+/* Assignment 3 */
+/* Name: Yunfan Yang */
+/* UCID: 30067857 */
+
+:root {
+  --over-overlay-bg-original-width: 427px;
+  --over-overlay-bg-original-height: 264px;
+  --over-overlay-bg-size-ratio: 1.0;
+  --over-overlay-bg-width: calc(var(--over-overlay-bg-original-width) * var(--over-overlay-bg-size-ratio));
+  --over-overlay-bg-height: calc(var(--over-overlay-bg-original-height) * var(--over-overlay-bg-size-ratio));
+}
+
+.over-wrapper {
+  background-image: url("assets/Paper.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 30;
+  height: var(--over-overlay-bg-height);
+  width: var(--over-overlay-bg-width);
+  padding: 2rem 1.8rem 2rem 2.4rem;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.over-wrapper .title {
+  font-size: 1.6rem;
+  font-weight: 600;
+}

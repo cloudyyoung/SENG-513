@@ -1,0 +1,44 @@
+:root {
+  --players-panel-bg-original-width: 228px;
+  --players-panel-bg-original-height: 264px;
+  --players-panel-bg-size-ratio: 1.2;
+  --players-panel-bg-width: calc(var(--players-panel-bg-original-width) * var(--players-panel-bg-size-ratio));
+  --players-panel-bg-height: calc(var(--players-panel-bg-original-height) * var(--players-panel-bg-size-ratio));
+}
+
+.players-wrapper {
+  background-image: url("assets/Paper2.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 30;
+  width: var(--players-panel-bg-width);
+  height: var(--players-panel-bg-height);
+  padding: 5rem 3.2rem 2rem;
+  color: black;
+}
+
+.players-wrapper .title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.players {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.players .player {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.players-wrapper .max-cards {
+  opacity: 0.5;
+  text-align: center;
+  margin-top: 0.6rem;
+}
